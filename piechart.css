@@ -1,0 +1,11 @@
+#piechart {
+    font: 2.5em sans-serif;
+    height: 1000px;
+    width: 500px;
+}
+
+#piechart .arc path {
+  stroke: #fff;
+  stroke-width: 10px;
+}
+

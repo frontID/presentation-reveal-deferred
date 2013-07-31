@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>d-reveal-3.js</title>
+
+		<meta name="description" content="A presentation of d3.js using reveal">
+		<meta name="author" content="David Zwarg">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="reveal.js-2.4.0/css/reveal.min.css">
+		<link rel="stylesheet" href="reveal.js-2.4.0/css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="reveal.js-2.4.0/lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="reveal.js-2.4.0/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="reveal.js-2.4.0/lib/js/html5shiv.js"></script>
+		<![endif]-->
+		
+		<link rel="stylesheet" href="piechart.css"/>
+		<link rel="stylesheet" href="barchart.css"/>
+		
+		<style type="text/css">
+		.sandbox {
+		    height: 300px;
+		    width: 1000px;
+		    background-color: #fff;
+		}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section>
+					<h1>d-reveal-d.js</h1>
+					<h3>DDD Presentations Made Easy</h3>
+					<p>
+						<small>Created by <a href="http://zwarg.com">David Zwarg</a> / <a href="mailto:david.a@zwarg.com">david.a@zwarg.com</a></small>
+					</p>
+				</section>
+
+				<section>
+					<h2>Welcome</h2>
+					<p>
+						I suppose this should be useful text.
+					</p>
+
+					<aside class="notes">
+						Oh hey, these are some notes.
+					</aside>
+				</section>
+                
+				<section>
+					<h2>Point of View</h2>
+					<p>
+						Press <strong>ESC</strong> to enter the slide overview.
+					</p>
+					<p>
+						Hold down alt and click on any element to zoom in on it using <a href="http://lab.hakim.se/zoom-js">zoom.js</a>. Alt + click anywhere to zoom back out.
+					</p>
+				</section>
+
+				<section>
+					<section data-state="piechart">
+						<h2>There is a pichart on this slide.</h2>
+						<p>
+							<div id="piechart"></div>
+						</p>
+					</section>
+					<section>
+					    <h2>Code</h2>
+					</section>
+				</section>
+
+				<section data-state="barchart">
+					<h2>Avast, mateys, here's a barnacled barchart.</h2>
+					<p>
+					    <div id="barchart"></div>
+					</p>
+				</section>
+
+                <section>
+                    <section>
+                        <h2>SVG Primitives</h2>
+                        <p>
+                            <a href="https://github.com/mbostock/d3/wiki/SVG-Shapes">https://github.com/mbostock/d3/wiki/SVG-Shapes</a>
+                        </p>
+                    </section>
+                    
+    				<section data-state="primitive-rect">
+	    				<h2>RECT</h2>
+		    			<pre><code id="rect-code" class="language-javascript" contenteditable>
+// g = an SVG 'g' element, h = height in px, w = width in px
+g.append('rect')
+  .style('fill', 'red')
+  .attr('height', h/2)
+  .attr('width', w/2)
+  .attr('x', -w/4)
+  .attr('y', -h/4);
+			    		</code></pre>
+			    		<div class="rect sandbox"></div>
+				    </section>
+				    
+				    <section data-state="primitive-circle">
+				        <h2>CIRCLE</h2>
+				        <pre><code id="circle-code" class="language-javascript" contenteditable>
+// g = an SVG 'g' element, h = height in px, w = width in px
+g.append('circle')
+  .style('fill', 'red')
+  .attr('cx', 0)
+  .attr('cy', 0)
+  .attr('r', w/4);
+  
+				        </code></pre>
+				        <div class="circle sandbox"></div>
+				    </section>
+
+				    <section data-state="primitive-ellipse">
+				        <h2>ELLIPSE</h2>
+				        <pre><code id="ellipse-code" class="language-javascript" contenteditable>
+// g = an SVG 'g' element, h = height in px, w = width in px
+g.append('ellipse')
+  .style('fill', 'red')
+  .attr('cx', 0)
+  .attr('cy', 0)
+  .attr('rx', w/3)
+  .attr('ry', w/8);
+				        </code></pre>
+				        <div class="ellipse sandbox"></div>
+				    </section>
+
+
+				    <section data-state="primitive-line">
+				        <h2>LINE</h2>
+				        <pre><code id="line-code" class="language-javascript" contenteditable>
+// g = an SVG 'g' element, h = height in px, w = width in px
+g.append('line')
+  .style('stroke', 'red')
+  .attr('x1', -w/3)
+  .attr('y1', -w/8)
+  .attr('x2', w/3)
+  .attr('y2', w/8);
+				        </code></pre>
+				        <div class="line sandbox"></div>
+				    </section>
+				    
+				    <section data-state="primitive-polyline">
+				        <h2>POLYLINE</h2>
+				        <pre><code id="polyline-code" class="language-javascript" contenteditable>
+// g = an SVG 'g' element, h = height in px, w = width in px
+g.append('polyline')
+  .style('stroke', 'red')
+  .style('fill', 'none')
+  .attr('points', '-100,-100 -50,100 50,100 100,-100');
+  
+  
+				        </code></pre>
+				        <div class="polyline sandbox"></div>
+				    </section>
+
+				    <section data-state="primitive-polygon">
+				        <h2>POLYGON</h2>
+				        <pre><code id="polygon-code" class="language-javascript" contenteditable>
+// g = an SVG 'g' element, h = height in px, w = width in px
+g.append('polygon')
+  .style('stroke', 'red')
+  .style('fill', 'none')
+  .attr('points', '-100,-100 -50,100 50,100 100,-100');
+  
+  
+				        </code></pre>
+				        <div class="polygon sandbox"></div>
+				    </section>
+
+				    <section data-state="primitive-text">
+				        <h2>TEXT</h2>
+				        <pre><code id="text-code" class="language-javascript" contenteditable>
+// g = an SVG 'g' element, h = height in px, w = width in px
+g.append('text')
+  .style('fill', 'red')
+  .style('stroke', 'none')
+  .attr('x', -100)
+  .attr('y', -10)
+  .text('Hellllo, Boston!');
+  
+				        </code></pre>
+				        <div class="text sandbox"></div>
+				    </section>
+				</section>
+
+				<section>
+					<h1>THE END</h1>
+					<h3>BY David Zwarg / david.a@zwarg.com</h3>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="reveal.js-2.4.0/lib/js/head.min.js"></script>
+		<script src="reveal.js-2.4.0/js/reveal.min.js"></script>
+
+        <!-- include d3.js -->
+        <script src="d3.v3/d3.v3.min.js"></script>
+        
+        <script src="util.js"></script>
+		<script>
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'reveal.js-2.4.0/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'reveal.js-2.4.0/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'reveal.js-2.4.0/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'reveal.js-2.4.0/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'reveal.js-2.4.0/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'reveal.js-2.4.0/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'reveal.js-2.4.0/plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'reveal.js-2.4.0/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+		</script>
+		<script src="piechart.js"></script>
+        <script src="barchart.js"></script>
+        <script>
+            interactiveSlide('rect');
+            interactiveSlide('circle');
+            interactiveSlide('ellipse');
+            interactiveSlide('line');
+            interactiveSlide('polyline');
+            interactiveSlide('polygon');
+            interactiveSlide('text');
+        </script>
+	</body>
+</html>

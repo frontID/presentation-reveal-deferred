@@ -1,0 +1,9 @@
+#barchart {
+    height: 1000px;
+    width: 500px;
+}
+
+#barchart rect {
+  stroke: #fff;
+  stroke-width: 10px;
+}
