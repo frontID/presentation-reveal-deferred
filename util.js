@@ -15,12 +15,12 @@ debounce = function (ms, ctx, fn) {
     };
 };
 
-updateD3 = function (svg, elem, h, w) {
+updateD3 = function (svg, elem, h, w, data) {
     return function() {
-        svg.select('g').remove();
+        svg.selectAll('g').remove();
         
         var draw = new Function('g', 'h', 'w', elem.textContent),
-            g = svg.append('g');
+            g = (data ? svg.selectAll('g').data(data).enter() : svg).append('g');
             
         draw(g, h, w);
     };

@@ -1,35 +1,22 @@
 
 Reveal.addEventListener( 'barchart', function() {
     var width = 1000,
-        height = 500;
+        height = 500,
+        elem = document.getElementById('barchart-code');
     
-    var color = 'green';
+    d3.select('.barchart.showcase').select('svg').remove();
     
-    // only display on the first visit to the slide
-    if (!d3.select("#barchart svg").empty()) {
-        return;
-    }
-    
-    var svg = d3.select("#barchart").append("svg")
+    var svg = d3.select(".barchart.showcase").append("svg")
         .attr("width", width)
         .attr("height", height)
       .append("g")
         .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+    
+    var doUpdate = updateD3(svg, elem, height, width);
         
-    
-    
-      var g = svg.append("g")
-          .attr("class", "bar");
-    
-      var rect = g.append("rect")
-          .style("fill", color)
-          .attr("x", -width/2)
-          .attr("y", -height/2)
-          .attr("width", 0)
-          .attr("height", height);
-    
-    rect.transition()
-        .duration(5000)
-        .attr("width", width);
-
+    doUpdate();
+        
+    elem.onkeypress = debounce(1000, elem, function () {
+        doUpdate();
+    });
 });
