@@ -9,7 +9,8 @@ var staticDir	= express.static;
 io				= io.listen(app);
 
 var opts = {
-	port: 1948,
+    ip: process.env.IP,
+	port: process.env.PORT,
 	baseDir : __dirname + '/../../'
 };
 
@@ -52,4 +53,4 @@ var brown = '\033[33m',
 	green = '\033[32m',
 	reset = '\033[0m';
 
-console.log( brown + "reveal.js:" + reset + " Multiplex running on port " + green + opts.port + reset );
+console.log( brown + "reveal.js:" + reset + " Multiplex running on " + green + opts.ip + reset + ":" + green + opts.port + reset );
