@@ -45,6 +45,9 @@ interactiveSlide = function(primitive) {
         doUpdate();
         
         elem.onkeypress = debounce(1000, elem, function () {
+            if (Reveal.psychicCodeDispatch) {
+                Reveal.psychicCodeDispatch(elem.id, elem.innerHTML);
+            }
             doUpdate();
         });
     });

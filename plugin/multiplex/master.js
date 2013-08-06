@@ -24,6 +24,7 @@
 			}
 
 			var slideData = {
+                type: 'slidechanged',
 				indexh : indexh,
 				indexv : indexv,
 				indexf : fragmentindex,
@@ -47,4 +48,16 @@
 
 	Reveal.addEventListener( 'fragmentshown', fragmentNotify );
 	Reveal.addEventListener( 'fragmenthidden', fragmentNotify );
+    
+    Reveal.psychicCodeDispatch = function( id, markup ) {
+        var codeData = {
+            type: 'codechanged',
+            id: id,
+            html: markup,
+			secret: multiplex.secret,
+			socketId : multiplex.id
+		};
+
+		socket.emit('codechanged', codeData);
+    };
 }());

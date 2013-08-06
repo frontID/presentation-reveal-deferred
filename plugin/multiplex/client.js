@@ -8,6 +8,15 @@
 		if (data.socketId !== socketId) { return; }
 		if( window.location.host === 'localhost:1947' ) return;
 
-		Reveal.slide(data.indexh, data.indexv, data.indexf, 'remote');
+        if (data.type && data.type === 'slidechanged') {
+    		Reveal.slide(data.indexh, data.indexv, data.indexf, 'remote');
+        }
+        else if (data.type && data.type === 'codechanged') {
+            var event = document.createEvent( "HTMLEvents", 1, 2 );
+    	    event.initEvent( 'keypress', true, true );
+            event.target = document.getElementById(data.id);
+            event.target.innerHTML = data.html;
+            document.querySelector('.reveal').dispatchEvent(event);
+        }
 	});
 }());
