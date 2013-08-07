@@ -4,9 +4,9 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>d-reveal-3.js</title>
+		<title>d3.js</title>
 
-		<meta name="description" content="A presentation of d3.js using reveal">
+		<meta name="description" content="A presentation of d3.js">
 		<meta name="author" content="David Zwarg">
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
@@ -49,17 +49,17 @@
 			<div class="slides">
 
 				<section>
-					<h1>d-reveal-d.js</h1>
-					<h3>DDD Presentations Made Easy</h3>
+					<h1>d3.js</h1>
+					<h3>Data Driven Documents</h3>
 					<p>
-						<small>Created by <a href="http://zwarg.com">David Zwarg</a> / <a href="mailto:david.a@zwarg.com">david.a@zwarg.com</a></small>
+						<small><a href="mailto:dzwarg@sapient.com">dzwarg@sapient.com</a></small>
 					</p>
 				</section>
 
 				<section>
-					<h2>Welcome</h2>
+					<h2>Data Driven</h2>
 					<p>
-						I suppose this should be useful text.
+						d3.js is designed to interact with data
 					</p>
 
 					<aside class="notes">
@@ -68,68 +68,11 @@
 				</section>
                 
 				<section>
-					<h2>Point of View</h2>
+					<h2>Documents</h2>
 					<p>
-						Press <strong>ESC</strong> to enter the slide overview.
-					</p>
-					<p>
-						Hold down alt and click on any element to zoom in on it using <a href="http://lab.hakim.se/zoom-js">zoom.js</a>. Alt + click anywhere to zoom back out.
+						Strong support for DOM, CSS3, and W3C standards.
 					</p>
 				</section>
-
-				<section>
-					<section data-state="piechart">
-						<h2>There is a pichart on this slide.</h2>
-						<p>
-							<div class="piechart showcase"></div>
-						</p>
-					</section>
-					<section>
-					    <h2>Code</h2>
-					    <pre><code id="piechart-code" class="language-javascript" contenteditable>
-// g = an SVG 'g' element, h = height in px, w = width in px
-var radius = Math.min(w, h) / 2,
-    arc = d3.svg.arc()
-      .outerRadius(radius - 10)
-      .innerRadius(0);
-      
-g.append("path")
-  .attr("d", arc)
-  .style("fill", '#ddd');
-
-g.append("text")
-  .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
-  .attr("dy", ".35em")
-  .style("text-anchor", "middle")
-  .text(function(d) { return d.data.age; });
-                        </code></pre>
-					</section>
-				</section>
-
-                <section>
-    				<section data-state="barchart">
-	    				<h2>Avast, mateys, here's a barnacled barchart.</h2>
-		    			<p>
-			    		    <div class="barchart showcase"></div>
-				    	</p>
-    				</section>
-    				<section>
-    				    <h2>Code</h2>
-    				    <pre><code id="barchart-code" class="language-javascript" contenteditable>
-// g = an SVG 'g' element, h = height in px, w = width in px
-var rect = g.append('rect')
-    .style('fill', 'green')
-    .attr('x', -w/2)
-    .attr('y', -h/2)
-    .attr('width', 0)
-    .attr('height', h);
-    
-rect.transition()
-    .duration(5000)
-    .attr('width', w);
-    				    </code></pre>
-    				</section>
-    			</section>
 
                 <section>
                     <section>
@@ -239,6 +182,100 @@ g.append('text')
 				        <div class="text sandbox"></div>
 				    </section>
 				</section>
+				
+				<section>
+				    <section data-state="selections">
+				        <h2>Selections</h2>
+				        <p>
+				            Work with sets of elements.
+				        </p>
+				    </section>
+				    <section data-state="selection-select">
+				        <h2>d3.select</h2>
+				        <pre><code id="select-code" class="language-javascript" contenteditable>
+// g = an SVG 'g' element, h = height in px, w = width in px
+g.append('text')
+  .style('fill', 'red')
+  .style('stroke', 'none')
+  .attr('x', 0)
+  .attr('y', 0)
+  .text(d3.select('.select.sandbox svg'));
+				        </code></pre>
+				        <div class="select sandbox"></div>
+				    </section>
+
+				    <section data-state="selection-selectall">
+				        <h2>d3.selectAll</h2>
+				        <pre><code id="selectall-code" class="language-javascript" contenteditable>
+// g = an SVG 'g' element, h = height in px, w = width in px
+g.append('circle').attr('cx', -100).attr('cy', 0).attr('r', 25);
+g.append('circle').attr('cx', 0).attr('cy', 0).attr('r', 25);
+g.append('circle').attr('cx', 100).attr('cy', 0).attr('r', 25);
+
+g.append('text')
+    .attr('x', 0)
+    .attr('y', 100)
+    .text(g.selectAll('circle').size());
+				        </code></pre>
+				        <div class="selectall sandbox"></div>
+				    </section>
+				
+				    <section data-state="selection-data">
+				        <h2>d3.data</h2>
+				        <pre><code id="data-code" class="language-javascript" contenteditable>
+// g = an SVG 'g' element, h = height in px, w = width in px
+g.selectAll('circle')
+    .data([-100, 0, 100])
+  .enter()
+    .append('circle').attr('cy', 0).attr('r', 25)
+    .attr('cx', function(d) { return d; });
+
+g.append('text').attr('x', 0).attr('y', 100)
+    .text(g.selectAll('circle').size());
+				        </code></pre>
+				        <div class="data sandbox"></div>
+				    </section>
+				</section>
+				
+				<section>
+				    <section data-state="transitions">
+				        <h2>Transitions</h2>
+				        <p>
+				            Apply a change to a property or style of a primitive over time.
+				        </p>
+				    </section>
+				    
+				    <section
+				</section>
+
+				<section>
+					<section data-state="pichart">
+						<h2>There can be only one Pichart</h2>
+						<p>
+							<div class="pichart showcase"></div>
+						</p>
+					</section>
+					<section>
+					    <h2>Code</h2>
+					    <pre><code id="pichart-code" class="language-javascript" contenteditable>
+// g = an SVG 'g' element, h = height in px, w = width in px
+var radius = Math.min(w, h) / 2,
+    arc = d3.svg.arc()
+      .outerRadius(radius - 10)
+      .innerRadius(0);
+      
+g.append("path")
+  .attr("d", arc)
+  .style("fill", '#ddd');
+
+g.append("text")
+  .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
+  .attr("dy", ".35em")
+  .style("text-anchor", "middle")
+  .text(function(d) { return d.data.age; });
+                        </code></pre>
+					</section>
+				</section>
 
 				<section>
 					<h1>THE END</h1>
@@ -283,8 +320,8 @@ g.append('text')
 					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
 					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
 					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
-					{ src: 'js/socket.io.min.js', async: true },
-                    { src: 'plugin/multiplex/client.js', async: true }
+					{ src: 'js/socket.io.min.js', async: true }
+                    //{ src: 'plugin/multiplex/client.js', async: true }
                     
 					// { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
 					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
@@ -292,15 +329,18 @@ g.append('text')
 			});
 		</script>
 		<script src="js/piechart.js"></script>
-        <script src="js/barchart.js"></script>
+        <!-- <script src="js/barchart.js"></script> -->
         <script>
-            interactiveSlide('rect');
-            interactiveSlide('circle');
-            interactiveSlide('ellipse');
-            interactiveSlide('line');
-            interactiveSlide('polyline');
-            interactiveSlide('polygon');
-            interactiveSlide('text');
+            interactiveSlide('primitive-rect', 'rect');
+            interactiveSlide('primitive-circle', 'circle');
+            interactiveSlide('primitive-ellipse', 'ellipse');
+            interactiveSlide('primitive-line', 'line');
+            interactiveSlide('primitive-polyline', 'polyline');
+            interactiveSlide('primitive-polygon', 'polygon');
+            interactiveSlide('primitive-text', 'text');
+            interactiveSlide('selection-select', 'select');
+            interactiveSlide('selection-selectall', 'selectall');
+            interactiveSlide('selection-data', 'data');
         </script>
 	</body>
 </html>

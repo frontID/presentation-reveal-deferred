@@ -1,10 +1,10 @@
-.piechart.showcase {
+.pichart.showcase {
     font: 2.5em sans-serif;
     height: 500px;
     width: 500px;
 }
 
-.piechart.showcase path {
+.pichart.showcase path {
   stroke: #fff;
   stroke-width: 10px;
 }

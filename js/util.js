@@ -19,6 +19,8 @@ updateD3 = function (svg, elem, h, w, data) {
     return function() {
         svg.selectAll('g').remove();
         
+        elem.innerHTML = hljs.highlight('javascript', elem.textContent, true).value;
+        
         var draw = new Function('g', 'h', 'w', elem.textContent),
             g = (data ? svg.selectAll('g').data(data).enter() : svg).append('g');
             
@@ -26,15 +28,15 @@ updateD3 = function (svg, elem, h, w, data) {
     };
 };
 
-interactiveSlide = function(primitive) {
-    Reveal.addEventListener('primitive-' + primitive, function() {
+interactiveSlide = function(state, sandbox) {
+    Reveal.addEventListener(state, function() {
         var width = 1000,
             height = 300,
-            elem = document.getElementById(primitive + '-code');
+            elem = document.getElementById(sandbox + '-code');
             
-        d3.select('.' + primitive + '.sandbox').select('svg').remove();
+        d3.select('.' + sandbox + '.sandbox').select('svg').remove();
             
-        var svg = d3.select('.' + primitive + '.sandbox').append('svg')
+        var svg = d3.select('.' + sandbox + '.sandbox').append('svg')
             .attr('width', width)
             .attr('height', height)
           .append('g')
