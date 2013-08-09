@@ -228,12 +228,63 @@ g.selectAll('circle')
     .data([-100, 0, 100])
   .enter()
     .append('circle').attr('cy', 0).attr('r', 25)
-    .attr('cx', function(d) { return d; });
+    .attr('cx', function(d) { return d; }); 
 
 g.append('text').attr('x', 0).attr('y', 100)
     .text(g.selectAll('circle').size());
 				        </code></pre>
 				        <div class="data sandbox"></div>
+				    </section>
+				    
+				    <section>
+				        <h2>d3.data joins your data into d3</h2>
+				        
+				        <p>
+				            data() lets you do powerful data-driven operations, such as:
+				        </p>
+				        
+				        <ul>
+				            <li><b>update()</b> all data elements that are updated</li>
+				            <li><b>enter()</b> all new data elements</li>
+				            <li><b>exit()</b> all old d3 elements</li>
+				    </section>
+				</section>
+				
+				<section>
+				    <section>
+				        <h2>data joins</h2>
+				        
+				        <p>Data served by your server and ingested by d3 is <i>joined</i> to the
+				        most recent data stored by the client.</p>
+				        
+				        <p>Visualizing these changes takes the form of 3 types of selections.</p>
+				    </section>
+				    
+				    <section data-state="data-update">
+				        <h2>Update Selection</h2>
+				        <pre><code id="update-code" class="language-javascript" contenteditable>
+// data = an array of data
+data = [100, 50, 100, 50, 100, 50, 100, 50];
+				        </code></pre>
+				        <div class="update sandbox"></div>
+				    </section>
+
+				    <section data-state="data-enter">
+				        <h2>Enter Selection</h2>
+				        <pre><code id="enter-code" class="language-javascript" contenteditable>
+// data = an array of data
+data = [10, 20];
+				        </code></pre>
+				        <div class="enter sandbox"></div>
+				    </section>
+
+				    <section data-state="data-exit">
+				        <h2>Exit Selection</h2>
+				        <pre><code id="exit-code" class="language-javascript" contenteditable>
+// data = an array of data
+data = [900, 800, 600, 400, 300, 200, 100];
+				        </code></pre>
+				        <div class="exit sandbox"></div>
 				    </section>
 				</section>
 				
@@ -341,6 +392,10 @@ g.append("text")
             interactiveSlide('selection-select', 'select');
             interactiveSlide('selection-selectall', 'selectall');
             interactiveSlide('selection-data', 'data');
+            dataSlide('data-update', 'update');
+            dataSlide('data-enter', 'enter');
+            dataSlide('data-exit', 'exit');
+            
         </script>
 	</body>
 </html>
