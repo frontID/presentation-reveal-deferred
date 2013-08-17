@@ -371,7 +371,7 @@ g.selectAll('rect')
   .enter()
     .append('rect')
     .style('fill', 'red') .attr('height', h/4) .attr('width', w/8) .attr('x', -w/2) 
-      .attr('y', function(d) { return (h/8 * d) - h/4;})
+      .attr('y', function(d) { return (10 * d) - h/2;})
     .transition()
       .delay(function(d){ return 100 * (10 + d);})
       .duration(function(d){ return 100 * (10 + d);})
@@ -381,6 +381,41 @@ g.selectAll('rect')
 				    </section>
 				</section>
 
+                <section>
+                    <section>
+                        <h2>Layouts</h2>
+                        
+                        <p>
+                            Control data distribution across the canvas
+                        </p>
+                    </section>
+                    
+                    <section>
+                        <h2>Hierarchical</h2>
+                        
+                        <ul>
+                            <li><a href="https://github.com/mbostock/d3/wiki/Bundle-Layout" target="_blank">Bundle</a></li>
+                            <li><a href="https://github.com/mbostock/d3/wiki/Chord-Layout" target="_blank">Chord</a></li>
+                            <li><a href="https://github.com/mbostock/d3/wiki/Cluster-Layout" target="_blank">Cluster</a></li>
+                            <li><a href="https://github.com/mbostock/d3/wiki/Force-Layout" target="_blank">Force</a></li>
+                            <li><a href="https://github.com/mbostock/d3/wiki/Pack-Layout" target="_blank">Pack</a></li>
+                            <li><a href="https://github.com/mbostock/d3/wiki/Partition-Layout" target="_blank">Partition</a></li>
+                            <li><a href="https://github.com/mbostock/d3/wiki/Tree-Layout" target="_blank">Tree</a></li>
+                            <li><a href="https://github.com/mbostock/d3/wiki/Treemap-Layout" target="_blank">Treemap</a></li>
+                        </ul>
+                    </section>
+                    
+                    <section>
+                        <h2>Chart (ish)</h2>
+                        
+                        <ul>
+                            <li><a href="https://github.com/mbostock/d3/wiki/Histogram-Layout" target="_blank">Histogram</a></li>
+                            <li><a href="https://github.com/mbostock/d3/wiki/Pie-Layout" target="_blank">Pie</a></li>
+                            <li><a href="https://github.com/mbostock/d3/wiki/Stack-Layout" target="_blank">Stack</a></li>
+                        </ul>
+                    </section>
+                </section>
+                
 				<section>
 					<section data-state="pichart">
 						<h2>There can be only one Pichart</h2>
