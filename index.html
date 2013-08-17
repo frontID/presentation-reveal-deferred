@@ -296,7 +296,89 @@ data = [900, 800, 600, 400, 300, 200, 100];
 				        </p>
 				    </section>
 				    
-				    <section
+				    <section data-state="transition-trans-attr">
+				        <h2>Transition Attributes</h2>
+				        <pre><code id="trans-attr-code" class="language-javascript" contenteditable>
+// g = an SVG 'g' element, h = height in px, w = width in px
+g.append('rect')
+  .style('fill', 'red')
+  .attr('height', h/2)
+  .attr('width', w/4)
+  .attr('x', -w/2)
+  .attr('y', -h/4)
+  .transition()
+  .attr('x', w/4);
+                        </code></pre>
+				        <div class="trans-attr sandbox"></div>
+				    </section>
+				    
+				    <section data-state="transition-trans-style">
+				        <h2>Transition Style</h2>
+				        <pre><code id="trans-style-code" class="language-javascript" contenteditable>
+// g = an SVG 'g' element, h = height in px, w = width in px
+g.append('rect')
+  .style('fill', 'red')
+  .attr('height', h/2)
+  .attr('width', w/2)
+  .attr('x', -w/4)
+  .attr('y', -h/4)
+  .transition()
+  .style('fill', 'green');
+                        </code></pre>
+				        <div class="trans-style sandbox"></div>
+				    </section>
+
+				    <section data-state="transition-delay">
+				        <h2>Delay</h2>
+				        <pre><code id="delay-code" class="language-javascript" contenteditable>
+// g = an SVG 'g' element, h = height in px, w = width in px
+g.append('rect')
+  .style('fill', 'red')
+  .attr('height', h/2)
+  .attr('width', w/4)
+  .attr('x', -w/2)
+  .attr('y', -h/4)
+  .transition()
+  .delay(3000)
+  .attr('x', w/4);
+                        </code></pre>
+				        <div class="delay sandbox"></div>
+				    </section>
+
+				    <section data-state="transition-duration">
+				        <h2>Duration</h2>
+				        <pre><code id="duration-code" class="language-javascript" contenteditable>
+// g = an SVG 'g' element, h = height in px, w = width in px
+g.append('rect')
+  .style('fill', 'red')
+  .attr('height', h/2)
+  .attr('width', w/4)
+  .attr('x', -w/2)
+  .attr('y', -h/4)
+  .transition()
+  .duration(3000)
+  .attr('x', w/4);
+                        </code></pre>
+				        <div class="duration sandbox"></div>
+				    </section>
+				    
+				    <section data-state="transition-combo">
+				        <h2>Combinations</h2>
+				        <pre><code id="combo-code" class="language-javascript" contenteditable>
+// g = an SVG 'g' element, h = height in px, w = width in px
+g.selectAll('rect')
+    .data([0, 10, 20])
+  .enter()
+    .append('rect')
+    .style('fill', 'red') .attr('height', h/4) .attr('width', w/8) .attr('x', -w/2) 
+      .attr('y', function(d) { return (h/8 * d) - h/4;})
+    .transition()
+      .delay(function(d){ return 100 * (10 + d);})
+      .duration(function(d){ return 100 * (10 + d);})
+    .attr('x', w*3/8);
+                        </code></pre>
+				        <div class="combo sandbox"></div>
+				    </section>
 				</section>
 
 				<section>
@@ -395,6 +477,11 @@ g.append("text")
             dataSlide('data-update', 'update');
             dataSlide('data-enter', 'enter');
             dataSlide('data-exit', 'exit');
+            interactiveSlide('transition-trans-attr', 'trans-attr');
+            interactiveSlide('transition-trans-style', 'trans-style');
+            interactiveSlide('transition-delay', 'delay');
+            interactiveSlide('transition-duration', 'duration');
+            interactiveSlide('transition-combo', 'combo');
             
         </script>
 	</body>
