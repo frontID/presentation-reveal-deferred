@@ -432,35 +432,6 @@ g.selectAll('rect')
                         </ul>
                     </section>
                 </section>
-                
-				<section>
-					<section data-state="pichart">
-						<h2>There can be only one Pichart</h2>
-						<p>
-							<div class="pichart showcase"></div>
-						</p>
-					</section>
-					<section>
-					    <h2>Code</h2>
-					    <pre><code id="pichart-code" class="language-javascript" contenteditable>
-// g = an SVG 'g' element, h = height in px, w = width in px
-var radius = Math.min(w, h) / 2,
-    arc = d3.svg.arc()
-      .outerRadius(radius - 10)
-      .innerRadius(0);
-      
-g.append("path")
-  .attr("d", arc)
-  .style("fill", '#ddd');
-
-g.append("text")
-  .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
-  .attr("dy", ".35em")
-  .style("text-anchor", "middle")
-  .text(function(d) { return d.data.age; });
-                        </code></pre>
-					</section>
-				</section>
 
 				<section>
 					<h1>THE END</h1>

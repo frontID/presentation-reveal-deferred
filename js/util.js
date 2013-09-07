@@ -1,4 +1,4 @@
-debounce = function (ms, ctx, fn) {
+debounce = function debounce(ms, ctx, fn) {
     var fnKey = fn.toString(),
         fullFn = function() {
             clearTimeout(window[fnKey]);
@@ -15,7 +15,7 @@ debounce = function (ms, ctx, fn) {
     };
 };
 
-updateD3 = function (svg, elem, h, w, data) {
+updateD3 = function updateD3(svg, elem, h, w, data) {
     return function() {
         svg.selectAll('g').remove();
         
@@ -28,8 +28,8 @@ updateD3 = function (svg, elem, h, w, data) {
     };
 };
 
-interactiveSlide = function(state, sandbox) {
-    Reveal.addEventListener(state, function() {
+interactiveSlide = function interactiveSlide(state, sandbox) {
+    Reveal.addEventListener(state, function addEventListener() {
         var width = 1000,
             height = 300,
             elem = document.getElementById(sandbox + '-code');
@@ -46,7 +46,7 @@ interactiveSlide = function(state, sandbox) {
         
         doUpdate();
         
-        elem.onkeypress = debounce(1000, elem, function () {
+        elem.onkeypress = debounce(1000, elem, function onkeypress() {
             if (Reveal.psychicCodeDispatch) {
                 Reveal.psychicCodeDispatch(elem.id, elem.innerHTML);
             }
@@ -55,8 +55,8 @@ interactiveSlide = function(state, sandbox) {
     });
 };
 
-updateData = function (svg, elem, h, w) {
-    return function() {
+updateData = function create_updateData(svg, elem, h, w) {
+    return function updateData() {
         elem.innerHTML = hljs.highlight('javascript', elem.textContent, true).value;
         
         var getData = new Function(elem.textContent + "return data;"),
@@ -95,8 +95,8 @@ updateData = function (svg, elem, h, w) {
     };
 };
 
-dataSlide = function(state, sandbox) {
-    Reveal.addEventListener(state, function() {
+dataSlide = function dataSlide(state, sandbox) {
+    Reveal.addEventListener(state, function addEventListener() {
         var width = 1000,
             height = 300,
             elem = document.getElementById(sandbox + '-code');

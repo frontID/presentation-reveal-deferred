@@ -1,5 +1,5 @@
 
-Reveal.addEventListener( 'pichart', function() {
+Reveal.addEventListener( 'pichart', function addEventListener() {
     var width = 1000,
         height = 500,
         elem = document.getElementById('pichart-code');
