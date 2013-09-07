@@ -38,6 +38,11 @@
 		    width: 1000px;
 		    background-color: #fff;
 		}
+		.data-join-ops b {
+		    display: inline-block;
+		    width: 30%;
+		    color: wheat;
+		}
 		</style>
 	</head>
 
@@ -104,7 +109,7 @@ g.append('circle')
   .style('fill', 'red')
   .attr('cx', 0)
   .attr('cy', 0)
-  .attr('r', w/4);
+  .attr('r', w/8);
   
 				        </code></pre>
 				        <div class="circle sandbox"></div>
@@ -118,7 +123,7 @@ g.append('ellipse')
   .style('fill', 'red')
   .attr('cx', 0)
   .attr('cy', 0)
-  .attr('rx', w/3)
+  .attr('rx', w/4)
   .attr('ry', w/8);
 				        </code></pre>
 				        <div class="ellipse sandbox"></div>
@@ -131,9 +136,9 @@ g.append('ellipse')
 // g = an SVG 'g' element, h = height in px, w = width in px
 g.append('line')
   .style('stroke', 'red')
-  .attr('x1', -w/3)
+  .attr('x1', -w/8)
   .attr('y1', -w/8)
-  .attr('x2', w/3)
+  .attr('x2', w/8)
   .attr('y2', w/8);
 				        </code></pre>
 				        <div class="line sandbox"></div>
@@ -174,9 +179,9 @@ g.append('polygon')
 g.append('text')
   .style('fill', 'red')
   .style('stroke', 'none')
-  .attr('x', -100)
-  .attr('y', -10)
-  .text('Hellllo, Boston!');
+  .attr('x', -150)
+  .attr('y', 10)
+  .text('Hello, Global Markets!');
   
 				        </code></pre>
 				        <div class="text sandbox"></div>
@@ -197,9 +202,9 @@ g.append('text')
 g.append('text')
   .style('fill', 'red')
   .style('stroke', 'none')
-  .attr('x', 0)
-  .attr('y', 0)
-  .text(d3.select('.select.sandbox svg'));
+  .attr('x', -175)
+  .attr('y', 10)
+  .text(d3.select('.select.sandbox svg').property('namespaceURI'));
 				        </code></pre>
 				        <div class="select sandbox"></div>
 				    </section>
@@ -209,13 +214,13 @@ g.append('text')
 				        <pre><code id="selectall-code" class="language-javascript" contenteditable>
 // g = an SVG 'g' element, h = height in px, w = width in px
 g.append('circle').attr('cx', -100).attr('cy', 0).attr('r', 25);
-g.append('circle').attr('cx', 0).attr('cy', 0).attr('r', 25);
-g.append('circle').attr('cx', 100).attr('cy', 0).attr('r', 25);
+g.append('circle').attr('cx', 0)   .attr('cy', 0).attr('r', 25);
+g.append('circle').attr('cx', 100) .attr('cy', 0).attr('r', 25);
 
 g.append('text')
-    .attr('x', 0)
-    .attr('y', 100)
-    .text(g.selectAll('circle').size());
+    .attr('x', 150)
+    .attr('y', 10)
+    .text('= ' + g.selectAll('circle').size());
 				        </code></pre>
 				        <div class="selectall sandbox"></div>
 				    </section>
@@ -224,14 +229,18 @@ g.append('text')
 				        <h2>d3.data</h2>
 				        <pre><code id="data-code" class="language-javascript" contenteditable>
 // g = an SVG 'g' element, h = height in px, w = width in px
-g.selectAll('circle')
+var data = g.selectAll('circle')
     .data([-100, 0, 100])
-  .enter()
-    .append('circle').attr('cy', 0).attr('r', 25)
-    .attr('cx', function(d) { return d; }); 
+  .enter();
+data.append('circle').attr('cy', 0).attr('r', 25)
+    .attr('cx',         function(d,i) { return d; });
+data.append('text')
+    .attr('x',          function(d,i) { return d - 8; })
+    .attr('y', 10).text(function(d,i) { return i; })
+    .style('fill', 'white');
 
-g.append('text').attr('x', 0).attr('y', 100)
-    .text(g.selectAll('circle').size());
+g.append('text').attr('x', 150).attr('y', 10)
+    .text('= ' + g.selectAll('circle').size());
 				        </code></pre>
 				        <div class="data sandbox"></div>
 				    </section>
@@ -240,13 +249,14 @@ g.append('text').attr('x', 0).attr('y', 100)
 				        <h2>d3.data joins your data into d3</h2>
 				        
 				        <p>
-				            data() lets you do powerful data-driven operations, such as:
+				            data() enables powerful data-driven operations:
 				        </p>
 				        
-				        <ul>
-				            <li><b>update()</b> all data elements that are updated</li>
-				            <li><b>enter()</b> all new data elements</li>
-				            <li><b>exit()</b> all old d3 elements</li>
+				        <ul class="data-join-ops">
+				            <li><b>data()</b> all changed elements</li>
+				            <li><b>enter()</b> all new elements</li>
+				            <li><b>exit()</b> all old elements</li>
+				        </ul>
 				    </section>
 				</section>
 				
@@ -254,16 +264,19 @@ g.append('text').attr('x', 0).attr('y', 100)
 				    <section>
 				        <h2>data joins</h2>
 				        
-				        <p>Data served by your server and ingested by d3 is <i>joined</i> to the
-				        most recent data stored by the client.</p>
-				        
-				        <p>Visualizing these changes takes the form of 3 types of selections.</p>
+				        <ul>
+				            <li>data loaded by d3 is <i>joined</i> to the most recent data.</li>
+				            <li>d3 will match the loaded data to the already rendered selection.</li>
+				            <li>d3 stores data with markup elements.</li>
+				        </ul>
 				    </section>
 				    
 				    <section data-state="data-update">
 				        <h2>Update Selection</h2>
 				        <pre><code id="update-code" class="language-javascript" contenteditable>
 // data = an array of data
+//
+// data() contains any of the changed array items  
 data = [100, 50, 100, 50, 100, 50, 100, 50];
 				        </code></pre>
 				        <div class="update sandbox"></div>
@@ -273,7 +286,9 @@ data = [100, 50, 100, 50, 100, 50, 100, 50];
 				        <h2>Enter Selection</h2>
 				        <pre><code id="enter-code" class="language-javascript" contenteditable>
 // data = an array of data
-data = [10, 20];
+//
+// enter() contains new elements added to this array
+data = [100, 200];
 				        </code></pre>
 				        <div class="enter sandbox"></div>
 				    </section>
@@ -282,7 +297,9 @@ data = [10, 20];
 				        <h2>Exit Selection</h2>
 				        <pre><code id="exit-code" class="language-javascript" contenteditable>
 // data = an array of data
-data = [900, 800, 600, 400, 300, 200, 100];
+//
+// exit() contains elements removed from this array
+data = [250, 225, 200, 175, 150, 125, 100];
 				        </code></pre>
 				        <div class="exit sandbox"></div>
 				    </section>
