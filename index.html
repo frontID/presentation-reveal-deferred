@@ -43,6 +43,9 @@
 		    width: 30%;
 		    color: wheat;
 		}
+		div.table table td {
+		    color: #000;
+		}
 		</style>
 	</head>
 
@@ -303,6 +306,21 @@ data = [250, 225, 200, 175, 150, 125, 100];
 				        </code></pre>
 				        <div class="exit sandbox"></div>
 				    </section>
+				    
+				    <section data-state="data-table">
+				        <h2>Selections are just HTML</h2>
+				        <pre><code id="table-code" class="language-javascript" contenteditable>
+// data = an array of data
+//
+// this selection
+data = [
+    [250, 225, 200],
+    [175, 150, 125],
+    [100]
+];
+				        </code></pre>
+				        <div class="table sandbox"></div>
+				    </section>
 				</section>
 				
 				<section>
@@ -487,25 +505,25 @@ g.selectAll('rect')
 		<script src="js/piechart.js"></script>
         <!-- <script src="js/barchart.js"></script> -->
         <script>
-            interactiveSlide('primitive-rect', 'rect');
-            interactiveSlide('primitive-circle', 'circle');
-            interactiveSlide('primitive-ellipse', 'ellipse');
-            interactiveSlide('primitive-line', 'line');
-            interactiveSlide('primitive-polyline', 'polyline');
-            interactiveSlide('primitive-polygon', 'polygon');
-            interactiveSlide('primitive-text', 'text');
-            interactiveSlide('selection-select', 'select');
-            interactiveSlide('selection-selectall', 'selectall');
-            interactiveSlide('selection-data', 'data');
-            dataSlide('data-update', 'update');
-            dataSlide('data-enter', 'enter');
-            dataSlide('data-exit', 'exit');
-            interactiveSlide('transition-trans-attr', 'trans-attr');
-            interactiveSlide('transition-trans-style', 'trans-style');
-            interactiveSlide('transition-delay', 'delay');
-            interactiveSlide('transition-duration', 'duration');
-            interactiveSlide('transition-combo', 'combo');
-            
+            interactiveSlide('primitive-rect', 'rect', updateD3);
+            interactiveSlide('primitive-circle', 'circle', updateD3);
+            interactiveSlide('primitive-ellipse', 'ellipse', updateD3);
+            interactiveSlide('primitive-line', 'line', updateD3);
+            interactiveSlide('primitive-polyline', 'polyline', updateD3);
+            interactiveSlide('primitive-polygon', 'polygon', updateD3);
+            interactiveSlide('primitive-text', 'text', updateD3);
+            interactiveSlide('selection-select', 'select', updateD3);
+            interactiveSlide('selection-selectall', 'selectall', updateD3);
+            interactiveSlide('selection-data', 'data', updateD3);
+            interactiveSlide('data-update', 'update', updateData, {vscale: 0.9, hscale:0.9});
+            interactiveSlide('data-enter', 'enter', updateData, {vscale: 0.9, hscale:0.9});
+            interactiveSlide('data-exit', 'exit', updateData, {vscale: 0.9, hscale:0.9});
+            interactiveSlide('transition-trans-attr', 'trans-attr', updateD3);
+            interactiveSlide('transition-trans-style', 'trans-style', updateD3);
+            interactiveSlide('transition-delay', 'delay', updateD3);
+            interactiveSlide('transition-duration', 'duration', updateD3);
+            interactiveSlide('transition-combo', 'combo', updateD3);
+            interactiveSlide('data-table', 'table', updateTable, {container: 'table', parent: 'tr'});
         </script>
 	</body>
 </html>

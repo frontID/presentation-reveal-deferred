@@ -15,52 +15,25 @@ debounce = function debounce(ms, ctx, fn) {
     };
 };
 
-updateD3 = function updateD3(svg, elem, h, w, data) {
+updateD3 = function updateD3(svg, elem, parent, h, w, data) {
     return function() {
-        svg.selectAll('g').remove();
+        svg.selectAll(parent).remove();
         
         elem.innerHTML = hljs.highlight('javascript', elem.textContent, true).value;
         
         var draw = new Function('g', 'h', 'w', elem.textContent),
-            g = (data ? svg.selectAll('g').data(data) : svg).append('g');
+            g = (data ? svg.selectAll(parent).data(data) : svg).append(parent);
             
         draw(g, h, w);
     };
 };
 
-interactiveSlide = function interactiveSlide(state, sandbox) {
-    Reveal.addEventListener(state, function addEventListener() {
-        var width = 1000,
-            height = 300,
-            elem = document.getElementById(sandbox + '-code');
-            
-        d3.select('.' + sandbox + '.sandbox').select('svg').remove();
-            
-        var svg = d3.select('.' + sandbox + '.sandbox').append('svg')
-            .attr('width', width)
-            .attr('height', height)
-          .append('g')
-            .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
-    
-        var doUpdate = updateD3(svg, elem, height, width);
-        
-        doUpdate();
-        
-        elem.onkeypress = debounce(1000, elem, function onkeypress() {
-            if (Reveal.psychicCodeDispatch) {
-                Reveal.psychicCodeDispatch(elem.id, elem.innerHTML);
-            }
-            doUpdate();
-        });
-    });
-};
-
-updateData = function create_updateData(svg, elem, h, w) {
+updateData = function create_updateData(svg, elem, parent, h, w) {
     return function updateData() {
         elem.innerHTML = hljs.highlight('javascript', elem.textContent, true).value;
         
         var getData = new Function(elem.textContent + "return data;"),
-            update = svg.selectAll('.bar')
+            update = svg.selectAll(parent)
                 .data(getData());
                 
         update.select('rect')
@@ -70,7 +43,7 @@ updateData = function create_updateData(svg, elem, h, w) {
             .attr('height', function (d) { return d; });
                 
         update.enter()
-            .append('g')
+            .append(parent)
             .attr('class', 'bar')
             .append('rect')
             .attr('x', function(d, i) { return (100 * i) - (w / 2); })
@@ -95,30 +68,67 @@ updateData = function create_updateData(svg, elem, h, w) {
     };
 };
 
-dataSlide = function dataSlide(state, sandbox) {
+updateTable = function create_updateTable(table, elem, parent, h, w) {
+    return function updateTable() {
+        elem.innerHTML = hljs.highlight('javascript', elem.textContent, true).value;
+        
+        var getData = new Function(elem.textContent + 'return data;'),
+            updateRow = table.selectAll(parent)
+                .data(getData()),
+            updateCell = updateRow.selectAll('td')
+                .data(function (d) { return d; });
+                
+        updateCell.text(function (d) { return d; });
+        
+        updateRow.enter()
+            .append(parent);
+            
+        var enterCell = updateRow.selectAll('td')
+            .data(function (d) { return d; })
+            .enter()
+            .append('td')
+            .style('color', function (d) { return 'rgb(127, ' + d + ', 127)'; })
+            .text(function (d) { return d; });
+            
+        updateRow.exit()
+            .remove();
+            
+        updateCell.exit()
+            .remove();
+    };
+};
+
+interactiveSlide = function dataSlide(state, sandbox, updateFn, options) {
     Reveal.addEventListener(state, function addEventListener() {
         var width = 1000,
             height = 300,
-            elem = document.getElementById(sandbox + '-code');
+            elem = document.getElementById(sandbox + '-code'),
+            vscale = (options && options.vscale) ? options.vscale : 1.0,
+            hscale = (options && options.hscale) ? options.hscale : 1.0,
+            container = (options && options.container) ? options.container : 'svg',
+            parent = (options && options.parent) ? options.parent : 'g';
             
-        d3.select('.' + sandbox + '.sandbox').select('svg').remove();
+        d3.select('.' + sandbox + '.sandbox').select(container).remove();
         
         var svg = d3.select('.' + sandbox + '.sandbox')
-            .append('svg')
+          .append(container)
             .attr('width', width)
-            .attr('height', height)
-          .append('g')
-            .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
+            .attr('height', height);
             
-        var dataUpdate = updateData(svg, elem, height * 0.9, width * 0.9);
+        if (parent === 'g') {
+            svg = svg.append(parent)
+                .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')');
+        }
+            
+        var doUpdate = updateFn(svg, elem, parent, height * vscale, width * hscale);
         
-        dataUpdate();
+        doUpdate();
         
-        elem.onkeypress = debounce(1000, elem, function () {
+        elem.onkeypress = debounce(1000, elem, function onkeypress() {
             if (Reveal.psychicCodeDispatch) {
                 Reveal.psychicCodeDispatch(elem.id, elem.innerHTML);
             }
-            dataUpdate();
+            doUpdate();
         });
     });
 };
