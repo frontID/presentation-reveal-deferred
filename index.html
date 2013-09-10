@@ -38,9 +38,12 @@
 		    width: 1000px;
 		    background-color: #fff;
 		}
+		.data-join-ops {
+			width: 60%;
+		}
 		.data-join-ops b {
 		    display: inline-block;
-		    width: 30%;
+		    width: 25%;
 		    color: wheat;
 		}
 		div.table table td {
@@ -57,28 +60,53 @@
 			<div class="slides">
 
 				<section>
-					<h1>d3.js</h1>
+					<h1>Intro to d3.js</h1>
 					<h3>Data Driven Documents</h3>
 					<p>
 						<small><a href="mailto:dzwarg@sapient.com">dzwarg@sapient.com</a></small>
 					</p>
 				</section>
+				
+				<section>
+					<h3>Useful Links</h3>
+					<ul>
+						<li>Follow Along:
+						<a href="http://d3-reveal-demo.dzwarg.c9.io/">http://d3-reveal-demo.dzwarg.c9.io/</a></li>
+						<li>Cloud9 workspace:
+						<a href="https://c9.io/dzwarg/d3-reveal-demo">https://c9.io/dzwarg/d3-reveal-demo</a></li>
+						<li>Github Repo:
+						<a href="https://github.com/dzwarg/d3-reveal-demo">https://github.com/dzwarg/d3-reveal-demo</a></li>
+					</ul>
+				</section>
 
 				<section>
 					<h2>Data Driven</h2>
 					<p>
-						d3.js is designed to interact with data
+						d3.js is designed to present data
 					</p>
-
-					<aside class="notes">
-						Oh hey, these are some notes.
-					</aside>
 				</section>
                 
 				<section>
 					<h2>Documents</h2>
 					<p>
-						Strong support for DOM, CSS3, and W3C standards.
+						Strong support for web standards
+					</p>
+					<ul>
+						<li>HTML5</li>
+						<li>CSS selectors</li>
+						<li>SVG</li>
+					<ul>
+				</section>
+				
+				<section>
+					<h2>Live Code Examples</h2>
+					
+					<p>
+						Code snippets are <i>live d3 demos</i>
+					</p>
+					
+					<p>
+						Edit the code if you are following along in your browser
 					</p>
 				</section>
 
@@ -217,8 +245,8 @@ g.append('text')
 				        <pre><code id="selectall-code" class="language-javascript" contenteditable>
 // g = an SVG 'g' element, h = height in px, w = width in px
 g.append('circle').attr('cx', -100).attr('cy', 0).attr('r', 25);
-g.append('circle').attr('cx', 0)   .attr('cy', 0).attr('r', 25);
-g.append('circle').attr('cx', 100) .attr('cy', 0).attr('r', 25);
+g.append('circle').attr('cx',    0).attr('cy', 0).attr('r', 25);
+g.append('circle').attr('cx',  100).attr('cy', 0).attr('r', 25);
 
 g.append('text')
     .attr('x', 150)
@@ -234,13 +262,9 @@ g.append('text')
 // g = an SVG 'g' element, h = height in px, w = width in px
 var data = g.selectAll('circle')
     .data([-100, 0, 100])
-  .enter();
-data.append('circle').attr('cy', 0).attr('r', 25)
-    .attr('cx',         function(d,i) { return d; });
-data.append('text')
-    .attr('x',          function(d,i) { return d - 8; })
-    .attr('y', 10).text(function(d,i) { return i; })
-    .style('fill', 'white');
+  .enter()
+    .append('circle').attr('cy', 0).attr('r', 25)
+    .attr('cx', function(d,i) { return d; });
 
 g.append('text').attr('x', 150).attr('y', 10)
     .text('= ' + g.selectAll('circle').size());
@@ -404,12 +428,11 @@ g.append('rect')
 g.selectAll('rect')
     .data([0, 10, 20])
   .enter()
-    .append('rect')
-    .style('fill', 'red') .attr('height', h/4) .attr('width', w/8) .attr('x', -w/2) 
-      .attr('y', function(d) { return (10 * d) - h/2;})
+    .append('rect').style('fill', 'red').attr('height', h/4).attr('width', w/8).attr('x', -w/2) 
+    .attr('y', function(d){ return (10 * d) - h/2; })
     .transition()
-      .delay(function(d){ return 100 * (10 + d);})
-      .duration(function(d){ return 100 * (10 + d);})
+    .delay(    function(d){ return 100 * (10 + d); })
+    .duration( function(d){ return 100 * (10 + d); })
     .attr('x', w*3/8);
                         </code></pre>
 				        <div class="combo sandbox"></div>
@@ -449,11 +472,32 @@ g.selectAll('rect')
                             <li><a href="https://github.com/mbostock/d3/wiki/Stack-Layout" target="_blank">Stack</a></li>
                         </ul>
                     </section>
+                    
+                    <section>
+                    	<h2>Geo & Projections</h2>
+                    	
+                    	<ul>
+                    		<li><a href="http://bl.ocks.org/mbostock/3757132" target="_blank">Spherical Mercator</a></li>
+                    		<li><a href="http://bl.ocks.org/mbostock/3788999" target="_blank">Albers Equal Area</a></li>
+                    		<li><a href="http://bl.ocks.org/mbostock/3795040" target="_blank">Orthographic</a></li>
+                    		<li><a href="http://bl.ocks.org/mbostock/3763057" target="_blank">Stereographic</a></li>
+                    	</ul>
+                    </section>
+                </section>
+                
+                <section>
+                	<h2>Learn More</h2>
+                	
+                	<ul>
+                		<li><a href="http://d3js.org/" target="_blank">http://d3js.org/</a></li>
+                		<li><a href="https://github.com/mbostock/d3/wiki/Gallery" target="_blank">Examples Gallery</a></li>
+                		<li><a href="https://github.com/mbostock/d3/wiki" target="_blank">Documentation</a></li>
+                	</ul>
                 </section>
 
 				<section>
-					<h1>THE END</h1>
-					<h3>BY David Zwarg / david.a@zwarg.com</h3>
+					<h2>Thank You</h2>
+					<h4>David Zwarg / dzwarg@sapient.com</h4>
 				</section>
 
 			</div>
