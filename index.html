@@ -66,6 +66,16 @@
 						<small><a href="mailto:dzwarg@sapient.com">dzwarg@sapient.com</a></small>
 					</p>
 				</section>
+
+                <section>
+                    <h3>TODO</h3>
+                    <ul>
+                        <li>Setup Follow Along and instructions:
+                            <a href="http://d3-reveal-demo.dzwarg.c9.io/">http://d3-reveal-demo.dzwarg.c9.io/</a></li>
+                        <li>Why Cloud9 workspace?:
+                            <a href="https://c9.io/dzwarg/d3-reveal-demo">https://c9.io/dzwarg/d3-reveal-demo</a></li>
+                    </ul>
+                </section>
 				
 				<section>
 					<h3>Useful Links</h3>
@@ -109,28 +119,59 @@
 						Edit the code if you are following along in your browser
 					</p>
 				</section>
-
+                
+                <section>
+                    <section>
+                        <h2>Deferreds</h2>
+                        <p>Stuff in here
+                        </p>
+                    </section>
+                    
+    				<section data-state="deferred-one">
+	    				<h2>ONE</h2>
+		    			<pre><code id="one-code" class="language-javascript" contenteditable>
+promise = function () {
+  var dfd = new $.Deferred();
+  console.log('I will promise!');
+  setTimeout(function(){
+    console.log('I promise!');
+    dfd.resolve();
+  }, 1000);
+  return dfd.promise();
+};
+done = function() {
+  console.log('done');
+};
+fail = function() {
+  console.log('fail');
+};
+			    		</code></pre>
+			    		<div class="one sandbox"></div>
+				    </section>
+                </section>
+                    
                 <section>
                     <section>
                         <h2>SVG Primitives</h2>
                         <p>
-                            <a href="https://github.com/mbostock/d3/wiki/SVG-Shapes">https://github.com/mbostock/d3/wiki/SVG-Shapes</a>
+                        <a href="https://github.com/mbostock/d3/wiki/SVG-Shapes">https://github.com/mbostock/d3/wiki/SVG-Shapes</a>
                         </p>
                     </section>
                     
-    				<section data-state="primitive-rect">
-	    				<h2>RECT</h2>
-		    			<pre><code id="rect-code" class="language-javascript" contenteditable>
-// g = an SVG 'g' element, h = height in px, w = width in px
-g.append('rect')
-  .style('fill', 'red')
-  .attr('height', h/2)
-  .attr('width', w/2)
-  .attr('x', -w/4)
-  .attr('y', -h/4);
-			    		</code></pre>
-			    		<div class="rect sandbox"></div>
-				    </section>
+                    <section data-state="primitive-rect">
+                        <h2>RECT</h2>
+                        <pre><code id="rect-code" class="language-javascript" contenteditable>
+                            // g = an SVG 'g' element, h = height in px, w = width in px
+                            g.append('rect')
+                            .style('fill', 'red')
+                            .attr('height', h/2)
+                            .attr('width', w/2)
+                            .attr('x', -w/4)
+                            .attr('y', -h/4);
+                            
+                        </code></pre>
+                        <div class="rect sandbox"></div>
+                    </section>
 				    
 				    <section data-state="primitive-circle">
 				        <h2>CIRCLE</h2>
@@ -525,9 +566,9 @@ g.selectAll('rect')
 
                 multiplex: {
                     // Example values. Generate your own.
-                    secret: null, // Obtained from the socket.io server. Gives this (the master) control of the presentation
-                    id: '75d4ee91d9f3d891', // Obtained from socket.io server
-                    url: 'd3-reveal-demo.dzwarg.c9.io:80' // Location of socket.io server
+                    secret: '13820311229668419494', // Obtained from the socket.io server. Gives this (the master) control of the presentation
+                    id: '30f22a324cb180fb', // Obtained from socket.io server
+                    url: 'reveal-presentation-template-c9-evandana_1.c9.io:80' // Location of socket.io server
                 },
     
 				// Optional libraries used to extend on reveal.js
@@ -539,14 +580,15 @@ g.selectAll('rect')
 					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
 					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
 					{ src: 'js/socket.io.min.js', async: true },
-					{ src: 'plugin/multiplex/client.js', async: true }
+					{ src: 'plugin/multiplex/master.js', async: true }
                     
 					// { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
 					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
 				]
 			});
 		</script>
-		<script src="js/piechart.js"></script>
+        <script src="js/piechart.js"></script>
+        <script src="lib/js/jquery.min.js"></script>
         <!-- <script src="js/barchart.js"></script> -->
         <script>
             interactiveSlide('primitive-rect', 'rect', updateD3);
@@ -568,6 +610,7 @@ g.selectAll('rect')
             interactiveSlide('transition-duration', 'duration', updateD3);
             interactiveSlide('transition-combo', 'combo', updateD3);
             interactiveSlide('data-table', 'table', updateTable, {container: 'table', parent: 'tr'});
+            interactiveSlide('deferred-one', 'one', updateDeferred);
         </script>
 	</body>
 </html>

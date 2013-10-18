@@ -98,6 +98,21 @@ updateTable = function create_updateTable(table, elem, parent, h, w) {
     };
 };
 
+// for evan
+updateDeferred = function create_updateDeferred(svg, elem, parent) {
+    return function updateDeferred() {
+        elem.innerHTML = hljs.highlight('javascript', elem.textContent, true).value;
+        
+        var fn = new Function('var promise,done,fail;' + elem.textContent + ';return { done:done, fail:fail, promise:promise };')();
+        
+        var promise = fn.promise();
+        
+        promise.done(fn.done);
+        promise.fail(fn.fail);
+        
+    };
+};
+
 interactiveSlide = function dataSlide(state, sandbox, updateFn, options) {
     Reveal.addEventListener(state, function addEventListener() {
         var width = 1000,
