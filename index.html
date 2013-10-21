@@ -74,11 +74,11 @@
                     <h3>Useful Links</h3>
                     <ul>
                         <li>Follow Along:
-                            <a href="http://d3-reveal-demo.dzwarg.c9.io/">http://d3-reveal-demo.dzwarg.c9.io/</a></li>
+                            <a href="http://reveal-presentation-template-c9-evandana_1.c9.io/">http://reveal-presentation-template-c9-evandana_1.c9.io/</a></li>
                         <li>Cloud9 workspace:
-                            <a href="https://c9.io/dzwarg/d3-reveal-demo">https://c9.io/dzwarg/d3-reveal-demo</a></li>
+                            <a href="https://c9.io/evandana_1/reveal-presentation-template">https://c9.io/evandana_1/reveal-presentation-template</a></li>
                         <li>Github Repo:
-                            <a href="https://github.com/dzwarg/d3-reveal-demo">https://github.com/dzwarg/d3-reveal-demo</a></li>
+                            <a href="https://github.com/evandana/reveal-presentation-template">https://github.com/evandana/reveal-presentation-template</a></li>
                     </ul>
                 </section>
 
@@ -95,7 +95,7 @@
                     <h2>Live Code Examples</h2>
 
                     <p>
-                        Code snippets are <i>live $.Deferred() demos</i>
+                        [Most] code snippets are <i>live demos</i>
                     </p>
 
                     <p>
@@ -134,7 +134,7 @@
 
                 <!-- vs -->
                     <section>
-                        <h2>Common Functions</h2>
+                        <h2>Functions Used in this Presentation</h2>
                         <pre><code id="vs-code" class="language-javascript" contenteditable>
 function quickFn(val) {
     return val + 99;
@@ -155,15 +155,20 @@ function wait(ms) {
                         </code></pre>
                     </section>
 
+                </section>
+
+                <section>
+
                 <!-- sync -->
                     <section data-state="deferred-sync">
                         <h2>Synchronous</h2>
+                        <p>Fast</p>
                         <pre><code id="sync-code" class="language-javascript" contenteditable>
 a = 1;
 sandlog("1: " + a);
 a = a + quickFn(a);
 sandlog("2: " + a);
-sandlog("3: not a long wait");
+sandlog("3: not even a noticable wait");
                         </code></pre>
                         <div class="sync sandbox">a = ?</div>
                     </section>
@@ -171,28 +176,148 @@ sandlog("3: not a long wait");
                 <!-- async -->
                     <section data-state="deferred-async">
                         <h2>Asynchronous</h2>
+                        <p>&#9786;</p>
                         <pre><code id="async-code" class="language-javascript" contenteditable>
-sandlog('1: immediate');
+sandlog("1: I'm first!");
 
 setTimeout(function(){
-    sandlog('2: delayed');
-    // what if we need the result from this?
+    sandlog("2: I'm slow");
 }, 2000);
 
-sandlog("3: yay! no waiting");
+sandlog("3: I didn't have to wait!");
                         </code></pre>
                         <div class="async sandbox">a = ?</div>
+                    </section>
+
+
+                    <!-- async -->
+                    <section data-state="deferred-aresult">
+                        <h2>Asynchronous Result?</h2>
+                        <p>&#9785;</p>
+                        <pre><code id="aresult-code" class="language-javascript" contenteditable>
+a = 'initial';
+
+sandlog("1: a = " + a);
+
+setTimeout(function(){
+    a = 'affected!';
+    sandlog("2: a = " + a);
+}, 2000);
+
+sandlog("3: a = " + a);
+                        </code></pre>
+                        <div class="aresult sandbox">a = ?</div>
                     </section>
                 </section>
 
                 <section>
                 <!-- promise spec -->
                     <section>
-                        <h2>Promise Spec</h2>
-                        <p></p>
+                        <h2>Promise Spec (1 of 2)</h2>
+                        <p>A Promise's states: unfulfilled, fulfilled, and failed</p>
+                        <ul style="font-size: 60%; color:#888;">
+                            <li>A promise represents the eventual value returned from the single completion of an operation.</li>
+                            <li>A promise may be in one of the three states, unfulfilled, fulfilled, and failed.</li>
+                            <li>Once a promise is fulfilled or failed, the promise's value MUST not be changed, just as a values in JavaScript, primitives and object identities, can not change.</li>
+                        </ul>
+                        <br/>
+                        <p><a href="http://wiki.commonjs.org/wiki/Promises/A" target="_blank">http://wiki.commonjs.org/wiki/Promises/A</a></p>
                     </section>
 
-                <!-- $.Deferred spec -->
+                    <section>
+                        <h2>Promise Spec (2 of 2)</h2>
+                        <p>Implement a Promise's interface with these specs</p>
+                        <ul style="font-size: 60%; color:#888;">
+                            <li>This API only defines the necessary interface that a promise must provide for promise consumers to interact with it.</li>
+                            <li>Implementors are free to define how promises are generated.</li>
+                            <li>Some promises may be provide their own functions to fulfill the promise, and other promises may be fulfilled by mechanisms that are not visible to the promise consumer.</li>
+                        </ul>
+                        <br/>
+                        <p><a href="http://wiki.commonjs.org/wiki/Promises/A" target="_blank">http://wiki.commonjs.org/wiki/Promises/A</a></p>
+                    </section>
+
+                <!-- old save pattern -->
+                    <section>
+                        <h2>Old Save Pattern</h2>
+                        <p>Hey, I know this stuff</p>
+                        <pre><code class="language-javascript" contenteditable>
+// not runnable
+
+object.save({ key: value }, {
+    success: function(object) {
+        // the object was saved.
+    },
+    error: function(object, error) {
+        // saving the object failed.
+    }
+});
+                        </code></pre>
+                    </section>
+                <!-- new save pattern -->
+                    <section>
+                        <h2>New Save Pattern</h2>
+                        <p>Looks pretty similar, right?</p>
+                        <pre><code class="language-javascript" contenteditable>
+// not runnable
+
+object.save({ key: value }).then(
+    function(object) {
+        // the object was saved.
+    },
+    function(error) {
+        // saving the object failed.
+    }
+);
+                        </code></pre>
+                    </section>
+
+                    <!-- old save pattern -->
+                    <section>
+                        <h2>Old Chain Pattern</h2>
+                        <p>Using the old pattern without Promises</p>
+                        <p>...and this doesn't include error handling!</p>
+                        <pre><code class="language-javascript" contenteditable>
+// not runnable
+
+Parse.User.logIn("user", "pass", {
+    success: function(user) {
+        query.find({
+            success: function(results) {
+                results[0].save({ key: value }, {
+                    success: function(result) {
+                        // the object was saved.
+                    }
+                });
+            }
+        });
+    }
+});
+                        </code></pre>
+                    </section>
+                    <!-- new chain pattern -->
+                    <section>
+                        <h2>New Chain Pattern</h2>
+                        <p>Now using Promises</p>
+                        <p>... it's much cleaner!</p>
+                        <pre><code class="language-javascript" contenteditable>
+// not runnable
+
+Parse.User.logIn("user", "pass").then(function(user) {
+    return query.find();
+}).then(function(results) {
+    return results[0].save({ key: value });
+}).then(function(result) {
+    // the object was saved.
+});
+                        </code></pre>
+                        <p>See it with error handling: <a href="http://blog.parse.com/2013/01/29/whats-so-great-about-javascript-promises/" target="_blank">http://blog.parse.com/2013/01/29/whats-so-great-about-javascript-promises/</a></p>
+                    </section>
+
+                </section>
+
+                <section>
+
+                    <!-- $.Deferred spec -->
                     <section>
                         <h2>$.Deferred() Spec</h2>
                         <p></p>
@@ -846,10 +971,13 @@ g.selectAll('rect')
 
                 <section>
                     <h2>References</h2>
-
+                    <p>Credit where it's due</p>
                     <ul>
-                        <li><a href="http://blog.mediumequalsmessage.com/promise-deferred-objects-in-javascript-pt2-practical-use
-" target="_blank">http://blog.mediumequalsmessage.com/promise-deferred-objects-in-javascript-pt2-practical-use
+                        <li><a href="http://blog.mediumequalsmessage.com/promise-deferred-objects-in-javascript-pt2-practical-use" target="_blank">
+                            http://blog.mediumequalsmessage.com/promise-deferred-objects-in-javascript-pt2-practical-use
+                        </a></li>
+                        <li><a href="http://blog.parse.com/2013/01/29/whats-so-great-about-javascript-promises/" target="_blank">
+                            http://blog.parse.com/2013/01/29/whats-so-great-about-javascript-promises/
                         </a></li>
                     </ul>
                 </section>
@@ -884,9 +1012,9 @@ g.selectAll('rect')
 
                 multiplex: {
                     // Example values. Generate your own.
-                    secret: '13821286591952758406', // Obtained from the socket.io server. Gives this (the master) control of the presentation
-                    id: 'c41ae50f716cae04', // Obtained from socket.io server
-                    url: 'reveal-presentation-template-clone-c9-evandana_1.c9.io:80' // Location of socket.io server
+                    secret: '13823765895479871959', // Obtained from the socket.io server. Gives this (the master) control of the presentation
+                    id: 'd24f27081861582c', // Obtained from socket.io server
+                    url: 'reveal-presentation-template-c9-evandana_1.c9.io:80' // Location of socket.io server
                 },
     
 				// Optional libraries used to extend on reveal.js
@@ -911,6 +1039,7 @@ g.selectAll('rect')
         <script>
             interactiveSlide('deferred-sync', 'sync', updateDeferred);
             interactiveSlide('deferred-async', 'async', updateDeferred);
+            interactiveSlide('deferred-aresult', 'aresult', updateDeferred);
             interactiveSlide('deferred-then', 'then', updateDeferred);
             interactiveSlide('deferred-fail', 'fail', updateDeferred);
             interactiveSlide('deferred-always', 'always', updateDeferred);
