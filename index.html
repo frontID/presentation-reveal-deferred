@@ -33,10 +33,13 @@
 		<link rel="stylesheet" href="css/barchart.css"/>
 		
 		<style type="text/css">
-		.sandbox {
-		    height: 300px;
+        .sandbox {
+		    height: 200px;
 		    width: 1000px;
 		    background-color: #fff;
+            color:#333;
+            text-align: left;
+            font-family: "Courier New", Courier, monospace;
 		}
 		.data-join-ops {
 			width: 60%;
@@ -60,42 +63,356 @@
 			<div class="slides">
 
 				<section>
-					<h1>Intro to d3.js</h1>
-					<h3>Data Driven Documents</h3>
+					<h1>And Then $.Deferred()</h1>
+					<h3>A promising presentation on decoupling async callbacks</h3>
 					<p>
-						<small><a href="mailto:dzwarg@sapient.com">dzwarg@sapient.com</a></small>
+						<small><a href="mailto:edana@sapient.com">edana@sapient.com</a></small>
 					</p>
 				</section>
 
                 <section>
-                    <h3>TODO</h3>
+                    <h3>Useful Links</h3>
                     <ul>
-                        <li>Setup Follow Along and instructions:
+                        <li>Follow Along:
                             <a href="http://d3-reveal-demo.dzwarg.c9.io/">http://d3-reveal-demo.dzwarg.c9.io/</a></li>
-                        <li>Why Cloud9 workspace?:
+                        <li>Cloud9 workspace:
                             <a href="https://c9.io/dzwarg/d3-reveal-demo">https://c9.io/dzwarg/d3-reveal-demo</a></li>
+                        <li>Github Repo:
+                            <a href="https://github.com/dzwarg/d3-reveal-demo">https://github.com/dzwarg/d3-reveal-demo</a></li>
                     </ul>
                 </section>
-				
-				<section>
-					<h3>Useful Links</h3>
-					<ul>
-						<li>Follow Along:
-						<a href="http://d3-reveal-demo.dzwarg.c9.io/">http://d3-reveal-demo.dzwarg.c9.io/</a></li>
-						<li>Cloud9 workspace:
-						<a href="https://c9.io/dzwarg/d3-reveal-demo">https://c9.io/dzwarg/d3-reveal-demo</a></li>
-						<li>Github Repo:
-						<a href="https://github.com/dzwarg/d3-reveal-demo">https://github.com/dzwarg/d3-reveal-demo</a></li>
-					</ul>
-				</section>
 
-				<section>
-					<h2>Data Driven</h2>
-					<p>
-						d3.js is designed to present data
-					</p>
-				</section>
-                
+                <section>
+                    <h3>Reveal.js & Follow-along (Zwarg)</h3>
+                    <ul>
+                        <li>ReadMe.txt</li>
+                        <li>c9.io</li>
+                        <li>GitHub</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Live Code Examples</h2>
+
+                    <p>
+                        Code snippets are <i>live $.Deferred() demos</i>
+                    </p>
+
+                    <p>
+                        Edit the code if you are following along in your browser
+                    </p>
+
+                </section>
+
+
+                <!-- OUTLINE -->
+
+                <!-- sync -->
+                <!-- async -->
+                <!-- blocking functions -->
+                <!-- tighly coupled callbacks -->
+                <!-- promise spec -->
+
+                <!-- $.Deferred spec -->
+                <!-- $.Deferred then()/done() -->
+                <!-- $.Deferred fail() -->
+                <!-- $.Deferred always() -->
+                <!-- $.Deferred multiple/when() -->
+                <!-- $.Deferred chaining -->
+
+                <!-- $.Deferred ex:fetch() -->
+                <!-- $.Deferred ex:button click -->
+                <!-- $.Deferred ex:css3 transition end -->
+
+
+
+
+
+                <!-- START -->
+
+                <section>
+
+                <!-- vs -->
+                    <section>
+                        <h2>Common Functions</h2>
+                        <pre><code id="vs-code" class="language-javascript" contenteditable>
+function quickFn(val) {
+    return val + 99;
+}
+
+function slowFn(val) {
+    setTimeout(function () {
+        return val + 99;
+    }, 2000);
+}
+
+function wait(ms) {
+    var deferred = $.Deferred();
+    setTimeout(deferred.resolve, ms);
+
+    return deferred.promise();
+}
+                        </code></pre>
+                    </section>
+
+                <!-- sync -->
+                    <section data-state="deferred-sync">
+                        <h2>Synchronous</h2>
+                        <pre><code id="sync-code" class="language-javascript" contenteditable>
+a = 1;
+sandlog("1: " + a);
+a = a + quickFn(a);
+sandlog("2: " + a);
+sandlog("3: not a long wait");
+                        </code></pre>
+                        <div class="sync sandbox">a = ?</div>
+                    </section>
+
+                <!-- async -->
+                    <section data-state="deferred-async">
+                        <h2>Asynchronous</h2>
+                        <pre><code id="async-code" class="language-javascript" contenteditable>
+sandlog('1: immediate');
+
+setTimeout(function(){
+    sandlog('2: delayed');
+    // what if we need the result from this?
+}, 2000);
+
+sandlog("3: yay! no waiting");
+                        </code></pre>
+                        <div class="async sandbox">a = ?</div>
+                    </section>
+                </section>
+
+                <section>
+                <!-- promise spec -->
+                    <section>
+                        <h2>Promise Spec</h2>
+                        <p></p>
+                    </section>
+
+                <!-- $.Deferred spec -->
+                    <section>
+                        <h2>$.Deferred() Spec</h2>
+                        <p></p>
+                    </section>
+
+                </section>
+
+                <section>
+
+                <!-- $.Deferred then()/done() -->
+                    <section data-state="deferred-then">
+                        <h2>Then (TODO)</h2>
+                            <pre><code id="then-code" class="language-javascript" contenteditable>
+                                promise = function () {
+                                var dfd = new $.Deferred();
+
+                                sandlog('call async function...');
+
+                                setTimeout(function(){
+                                dfd.resolve();
+                                }, 2000);
+
+                                sandlog('wait for async to finish...');
+                                return dfd.promise();
+                                };
+                                done = function() {
+                                sandlog('> async done!');
+                                };
+                            </code></pre>
+                        <div class="then sandbox">a = ?</div>
+                    </section>
+
+                <!-- $.Deferred fail() -->
+                    <section data-state="deferred-fail">
+                        <h2>Fail (TODO)</h2>
+                            <pre><code id="fail-code" class="language-javascript" contenteditable>
+                                promise = function () {
+                                var dfd = new $.Deferred();
+
+                                sandlog('call async function...');
+
+                                setTimeout(function(){
+                                dfd.resolve();
+                                }, 2000);
+
+                                sandlog('wait for async to finish...');
+                                return dfd.promise();
+                                };
+                                done = function() {
+                                sandlog('> async done!');
+                                };
+                            </code></pre>
+                        <div class="fail sandbox">a = ?</div>
+                    </section>
+
+                <!-- $.Deferred always() -->
+                    <section data-state="deferred-always">
+                        <h2>Always (TODO)</h2>
+                            <pre><code id="always-code" class="language-javascript" contenteditable>
+                                promise = function () {
+                                var dfd = new $.Deferred();
+
+                                sandlog('call async function...');
+
+                                setTimeout(function(){
+                                dfd.resolve();
+                                }, 2000);
+
+                                sandlog('wait for async to finish...');
+                                return dfd.promise();
+                                };
+                                done = function() {
+                                sandlog('> async done!');
+                                };
+                            </code></pre>
+                        <div class="always sandbox">a = ?</div>
+                    </section>
+                </section>
+
+                <section>
+
+                <!-- blocking functions -->
+                    <section data-state="deferred-block">
+                        <h2>Blocking</h2>
+                        <pre><code id="block-code" class="language-javascript" contenteditable>
+function blockingFn(val) {
+    // any blocking call: endpoint delay, UI action, loading, slow function...
+    alert('blocking until closed');
+    return val + 99;
+}
+a = 1;
+sandlog("1: a = " + a);
+a = a + blockingFn(a);
+sandlog("2: waited for blocked: a = " + a);
+sandlog("3: why did I also have to wait?");
+                        </code></pre>
+                        <div class="block sandbox">a = ?</div>
+                    </section>
+
+                <!-- nonblocking functions -->
+                    <section data-state="deferred-nonblock">
+                        <h2>Non-Blocking</h2>
+                            <pre><code id="nonblock-code" class="language-javascript" contenteditable>
+function nonBlockingFn(val) {
+    var dfd = $.Deferred();
+    // any blocking call: endpoint delay, UI action, loading, slow function...
+    setTimeout(function () {
+        dfd.resolveWith(this, [val + 99]);
+    }, 2000);
+    return dfd;
+}
+a = 1;
+console.log("1: a = " + a);
+nonBlockingFn(a).done(function (aResult) {
+    a = a + aResult;
+    console.log("2: waited for blocked: a = " + a);
+});
+console.log("3: I wasn't blocked!");
+                            </code></pre>
+                        <div class="nonblock sandbox">a = ?</div>
+                    </section>
+                </section>
+
+                <section>
+
+                <!-- coupled callbacks -->
+                    <section data-state="deferred-coupled">
+                        <h2>Tighly Coupled Callbacks</h2>
+                        <pre><code id="coupled-code" style="font-size: 90%; line-height: 1.2em" class="language-javascript" contenteditable>
+sandlog('1 started');
+
+wait(2000).then(function () {
+    sandlog('1 ended');
+    }).then(function () {
+        sandlog('2 started');
+
+    return wait(2000).done(function () {
+        sandlog('2 ended');
+    });
+});
+                        </code></pre>
+                        <div class="coupled sandbox"></div>
+                    </section>
+
+                <!-- decoupled callbacks -->
+                    <section data-state="deferred-decoupled">
+                        <h2>Decoupled Callbacks</h2>
+                        <pre><code id="decoupled-code" style="font-size: 90%; line-height: 1.2em" class="language-javascript" contenteditable>
+sandlog('1 started');
+
+var dfd1 = wait(2000);
+
+dfd1.done(function () {
+    sandlog('1 ended');
+});
+
+var dfd2 = dfd1.then(function () {
+    sandlog('2 started');
+    return wait(2000);
+}, function () { /* fail */ },
+function () { /* progress */ }
+);
+
+dfd2.done(function () {
+    sandlog('2 ended');
+});
+                        </code></pre>
+                        <!--var aManualDeferred, secondManualDeferred, thirdManualDeferred;-->
+
+                        <!--// Create two new deferred objects-->
+                        <!--aManualDeferred = $.Deferred();-->
+
+                        <!--secondManualDeferred = aManualDeferred.then(function () {-->
+                        <!--sandlog('1 started');-->
+
+                        <!--// We need to return this, we return a new promise which is resolved upon completion.-->
+                        <!--return wait(2000);-->
+                        <!--})-->
+                        <!--.done(function () {-->
+                        <!--sandlog('1 ended');-->
+                        <!--});-->
+
+                        <!--thirdManualDeferred = secondManualDeferred.then(function () {-->
+                        <!--sandlog('2 started');-->
+                        <!--return wait(2000);-->
+                        <!--})-->
+                        <!--.done(function () {-->
+                        <!--sandlog('2 ended');-->
+                        <!--});-->
+
+                        <!--// Resolve the first promise-->
+                        <!--aManualDeferred.resolve();-->
+                        <div class="decoupled sandbox"></div>
+                    </section>
+                </section>
+
+
+                <!-- $.Deferred multiple/when() -->
+                <!-- $.Deferred chaining -->
+
+                <!-- $.Deferred ex:fetch() -->
+                <!-- $.Deferred ex:button click -->
+                <!-- $.Deferred ex:css3 transition end -->
+
+
+                <section>
+                    <h2>$.Deferred() and Beyond</h2>
+                    <h3> <span class="mw-headline" id="Libraries"> Libraries </span></h3>
+                    <ul><li> <a rel="nofollow" class="external text" href="https://github.com/kriskowal/q">Q</a> Works in both NodeJS and browsers, compatible with jQuery, thenable, and usable as remote objects via message passing
+                    </li><li> <a rel="nofollow" class="external text" href="https://github.com/tildeio/rsvp.js">RSVP.js</a> A lightweight library that provides tools for organizing asynchronous code
+                    </li><li> <a rel="nofollow" class="external text" href="https://github.com/cujojs/when">when.js</a> Compact promises with joining and chaining
+                    </li><li> <a rel="nofollow" class="external text" href="https://github.com/kriszyp/node-promise">node-promise</a> Promises for NodeJS
+                    </li><li> <a rel="nofollow" class="external text" href="http://api.jquery.com/category/deferred-object/">jQuery 1.5</a> is said  to be 'based on the CommonJS Promises/A design'.
+                    </li><li> <a rel="nofollow" class="external text" href="https://github.com/ForbesLindesay/promises-a">ForbesLindesay/promises-a</a> A bare bones implementation of Promises/A intended to pass <a rel="nofollow" class="external free" href="https://github.com/domenic/promise-tests">https://github.com/domenic/promise-tests</a> while being as small as possible
+                    </li><li> <a rel="nofollow" class="external text" href="http://msdn.microsoft.com/en-us/library/windows/apps/br211867.aspx">WinJS / Windows 8 / Metro</a>
+                    </li></ul>
+                </section>
+
+<!--
+<div class="d3-slides">
 				<section>
 					<h2>Documents</h2>
 					<p>
@@ -105,21 +422,10 @@
 						<li>HTML5</li>
 						<li>CSS selectors</li>
 						<li>SVG</li>
-					<ul>
+					</ul>
 				</section>
 				
-				<section>
-					<h2>Live Code Examples</h2>
-					
-					<p>
-						Code snippets are <i>live d3 demos</i>
-					</p>
-					
-					<p>
-						Edit the code if you are following along in your browser
-					</p>
-				</section>
-                
+
                 <section>
                     <section>
                         <h2>Deferreds</h2>
@@ -525,7 +831,9 @@ g.selectAll('rect')
                     	</ul>
                     </section>
                 </section>
-                
+</div>
+-->
+
                 <section>
                 	<h2>Learn More</h2>
                 	
@@ -536,9 +844,19 @@ g.selectAll('rect')
                 	</ul>
                 </section>
 
+                <section>
+                    <h2>References</h2>
+
+                    <ul>
+                        <li><a href="http://blog.mediumequalsmessage.com/promise-deferred-objects-in-javascript-pt2-practical-use
+" target="_blank">http://blog.mediumequalsmessage.com/promise-deferred-objects-in-javascript-pt2-practical-use
+                        </a></li>
+                    </ul>
+                </section>
+
 				<section>
 					<h2>Thank You</h2>
-					<h4>David Zwarg / dzwarg@sapient.com</h4>
+					<h4>Evan Dana / edana@sapient.com</h4>
 				</section>
 
 			</div>
@@ -566,9 +884,9 @@ g.selectAll('rect')
 
                 multiplex: {
                     // Example values. Generate your own.
-                    secret: '13820311229668419494', // Obtained from the socket.io server. Gives this (the master) control of the presentation
-                    id: '30f22a324cb180fb', // Obtained from socket.io server
-                    url: 'reveal-presentation-template-c9-evandana_1.c9.io:80' // Location of socket.io server
+                    secret: '13821286591952758406', // Obtained from the socket.io server. Gives this (the master) control of the presentation
+                    id: 'c41ae50f716cae04', // Obtained from socket.io server
+                    url: 'reveal-presentation-template-clone-c9-evandana_1.c9.io:80' // Location of socket.io server
                 },
     
 				// Optional libraries used to extend on reveal.js
@@ -591,6 +909,15 @@ g.selectAll('rect')
         <script src="lib/js/jquery.min.js"></script>
         <!-- <script src="js/barchart.js"></script> -->
         <script>
+            interactiveSlide('deferred-sync', 'sync', updateDeferred);
+            interactiveSlide('deferred-async', 'async', updateDeferred);
+            interactiveSlide('deferred-then', 'then', updateDeferred);
+            interactiveSlide('deferred-fail', 'fail', updateDeferred);
+            interactiveSlide('deferred-always', 'always', updateDeferred);
+            interactiveSlide('deferred-block', 'block', updateDeferred);
+            interactiveSlide('deferred-nonblock', 'nonblock', updateDeferred);
+            interactiveSlide('deferred-coupled', 'coupled', updateDeferred);
+            interactiveSlide('deferred-decoupled', 'decoupled', updateDeferred);
             interactiveSlide('primitive-rect', 'rect', updateD3);
             interactiveSlide('primitive-circle', 'circle', updateD3);
             interactiveSlide('primitive-ellipse', 'ellipse', updateD3);

@@ -15,6 +15,30 @@ debounce = function debounce(ms, ctx, fn) {
     };
 };
 
+_sandlog = function (codeElem) {
+    return function (msg) {
+        console.log(codeElem.id);
+        $(codeElem.parentElement.parentElement).find('.sandbox').append('<p>'+ msg +'</p>');
+    };
+};
+
+function quickFn(val) {
+    return val + 99;
+}
+
+function slowFn(val) {
+    setTimeout(function () {
+        return val + 99;
+    }, 2000);
+}
+function wait(ms) {
+    var deferred = $.Deferred();
+    setTimeout(deferred.resolve, ms);
+
+    // We just need to return the promise not the whole deferred.
+    return deferred.promise();
+}
+
 updateD3 = function updateD3(svg, elem, parent, h, w, data) {
     return function() {
         svg.selectAll(parent).remove();
@@ -99,16 +123,41 @@ updateTable = function create_updateTable(table, elem, parent, h, w) {
 };
 
 // for evan
+//updateDeferred = function create_updateDeferred(svg, elem, parent) {
+//    return function updateDeferred() {
+//        elem.innerHTML = hljs.highlight('javascript', elem.textContent, true).value;
+//
+//        var fn = new Function('var promise,done,fail;' + elem.textContent + ';return { done:done, fail:fail, promise:promise };')();
+//
+//        var promise = fn.promise();
+//
+//        promise.done(fn.done);
+//        promise.fail(fn.fail);
+//
+//    };
+//};
 updateDeferred = function create_updateDeferred(svg, elem, parent) {
     return function updateDeferred() {
+        // sets codeElem for sandlog()
+        $(elem.parentElement.parentElement).find('.sandbox').html('');
+
         elem.innerHTML = hljs.highlight('javascript', elem.textContent, true).value;
-        
-        var fn = new Function('var promise,done,fail;' + elem.textContent + ';return { done:done, fail:fail, promise:promise };')();
-        
-        var promise = fn.promise();
+
+        var sandlog = _sandlog(elem);
+
+        var fn = new Function(
+            'sandlog',
+            'var promise,done,fail,a;' +
+             elem.textContent +
+            ';return { done:done, fail:fail, promise:promise, a:a, };')(sandlog);
+
+
+        var promise = fn.promise && fn.promise() || $.Deferred().resolve();
         
         promise.done(fn.done);
         promise.fail(fn.fail);
+
+        //$(elem.parentElement.parentElement).find('.sandbox').html('a = ' + fn.a);
         
     };
 };
