@@ -1,753 +1,753 @@
 <!doctype html>
 <html lang="en">
 
-	<head>
-		<meta charset="utf-8">
+<head>
+    <meta charset="utf-8">
 
-		<title>$.Deferred() Presentation</title>
+    <title>$.Deferred() Presentation</title>
 
-		<meta name="description" content="A presentation of d3.js">
-		<meta name="author" content="David Zwarg">
+    <meta name="description" content="A presentation of d3.js">
+    <meta name="author" content="David Zwarg">
 
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="css/reveal.min.css">
-		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+    <link rel="stylesheet" href="css/reveal.min.css">
+    <link rel="stylesheet" href="css/theme/default.css" id="theme">
 
-		<!-- For syntax highlighting -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
 
-		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
-		<script>
-			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
-		</script>
+    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+    <script>
+        document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+    </script>
 
-		<!--[if lt IE 9]>
-		<script src="lib/js/html5shiv.js"></script>
-		<![endif]-->
-		
-		<link rel="stylesheet" href="css/piechart.css"/>
-		<link rel="stylesheet" href="css/barchart.css"/>
-		
-		<style type="text/css">
-            .codeboxwrapper {
-                position:relative;
-                width:100%;
-            }
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
 
-            .reveal pre {
-                width:67%;
-                float:left;
-                margin:auto;
-            }
+    <link rel="stylesheet" href="css/piechart.css"/>
+    <link rel="stylesheet" href="css/barchart.css"/>
 
-            .reveal .sandbox {
-                height: 200px;
-                width:30%;
-                float:right;
-                background:#aaa;
-                border:1px solid #888;
-                color:#111;
-                padding:1%;
-                text-align: left;
-                font-size: 70%;
-                font-family: "Courier New", Courier, monospace;
-            }
-            .data-join-ops {
-                width: 60%;
-            }
-            .data-join-ops b {
-                display: inline-block;
-                width: 25%;
-                color: wheat;
-            }
-            div.table table td {
-                color: #000;
-            }
-		</style>
-	</head>
+    <style type="text/css">
+        .codeboxwrapper {
+            position:relative;
+            width:100%;
+        }
 
-	<body>
+        .reveal pre {
+            width:67%;
+            float:left;
+            margin:auto;
+        }
 
-		<div class="reveal">
+        .reveal .sandbox {
+            height: 200px;
+            width:30%;
+            float:right;
+            background:#aaa;
+            border:1px solid #888;
+            color:#111;
+            padding:1%;
+            text-align: left;
+            font-size: 70%;
+            font-family: "Courier New", Courier, monospace;
+        }
+        .data-join-ops {
+            width: 60%;
+        }
+        .data-join-ops b {
+            display: inline-block;
+            width: 25%;
+            color: wheat;
+        }
+        div.table table td {
+            color: #000;
+        }
+    </style>
+</head>
 
-			<!-- Any section element inside of this container is displayed as a slide -->
-			<div class="slides">
+<body>
 
-				<section>
-					<h1>And Then $.Deferred()</h1>
-					<h3>A promising presentation on decoupling async callbacks</h3>
-					<p>
-						<small><a href="mailto:edana@sapient.com">edana@sapient.com</a></small>
-					</p>
-				</section>
+<div class="reveal">
 
-                <section>
-                    <h3>Useful Links</h3>
-                    <ul>
-                        <li>Follow Along:
-                            <a href="http://reveal-presentation-template-c9-evandana_1.c9.io/">http://reveal-presentation-template-c9-evandana_1.c9.io/</a></li>
-                        <li>Cloud9 workspace:
-                            <a href="https://c9.io/evandana_1/reveal-presentation-template">https://c9.io/evandana_1/reveal-presentation-template</a></li>
-                        <li>Github Repo:
-                            <a href="https://github.com/evandana/reveal-presentation-template">https://github.com/evandana/reveal-presentation-template</a></li>
-                    </ul>
-                </section>
+<!-- Any section element inside of this container is displayed as a slide -->
+<div class="slides">
 
-                <section>
-                    <h3>Reveal.js & Follow-along (Zwarg)</h3>
-                    <ul>
-                        <li>ReadMe.txt</li>
-                        <li>c9.io</li>
-                        <li>GitHub</li>
-                    </ul>
-                </section>
+<section>
+    <h1>And Then $.Deferred()</h1>
+    <h3>A promising presentation on decoupling async callbacks</h3>
+    <p>
+        <small><a href="mailto:edana@sapient.com">edana@sapient.com</a></small>
+    </p>
+</section>
 
-                <section>
-                    <h2>Live Code Examples</h2>
+<section>
+    <h3>Useful Links</h3>
+    <ul>
+        <li>Follow Along:
+            <a href="http://presentation-reveal-deferred-c9-evandana_1.c9.io">http://presentation-reveal-deferred-c9-evandana_1.c9.io/</a></li>
+        <li>Cloud9 workspace:
+            <a href="http://c9.io/evandana_1/presentation-reveal-deferred">http://c9.io/evandana_1/presentation-reveal-deferred</a></li>
+        <li>Github Repo:
+            <a href="http://github.com/evandana/presentation-reveal-deferred">http://github.com/evandana/presentation-reveal-deferred</a></li>
+    </ul>
+</section>
 
-                    <p>
-                        [Most] code snippets are <i>live demos</i>
-                    </p>
+<section>
+    <h3>Reveal.js & Follow-along (Zwarg)</h3>
+    <ul>
+        <li>ReadMe.txt</li>
+        <li>c9.io</li>
+        <li>GitHub</li>
+    </ul>
+</section>
 
-                    <p>
-                        Edit the code if you are following along in your browser
-                    </p>
+<section>
+    <h2>Live Code Examples</h2>
 
-                </section>
+    <p>
+        [Most] code snippets are <i>live demos</i>
+    </p>
 
+    <p>
+        Edit the code if you are following along in your browser
+    </p>
 
-                <!-- OUTLINE -->
-
-                <!-- sync -->
-                <!-- async -->
-                <!-- blocking functions -->
-                <!-- tighly coupled callbacks -->
-                <!-- promise spec -->
-
-                <!-- $.Deferred spec -->
-                <!-- $.Deferred then()/done() -->
-                <!-- $.Deferred fail() -->
-                <!-- $.Deferred always() -->
-                <!-- $.Deferred multiple/when() -->
-                <!-- $.Deferred chaining -->
-
-                <!-- $.Deferred ex:fetch() -->
-                <!-- $.Deferred ex:button click -->
-                <!-- $.Deferred ex:css3 transition end -->
+</section>
 
 
+<!-- OUTLINE -->
+
+<!-- sync -->
+<!-- async -->
+<!-- blocking functions -->
+<!-- tighly coupled callbacks -->
+<!-- promise spec -->
+
+<!-- $.Deferred spec -->
+<!-- $.Deferred then()/done() -->
+<!-- $.Deferred fail() -->
+<!-- $.Deferred always() -->
+<!-- $.Deferred multiple/when() -->
+<!-- $.Deferred chaining -->
+
+<!-- $.Deferred ex:fetch() -->
+<!-- $.Deferred ex:button click -->
+<!-- $.Deferred ex:css3 transition end -->
 
 
 
-                <!-- START -->
 
-                <section>
 
-                <!-- vs -->
-                    <section>
-                        <h2>Functions Used in this Presentation</h2>
-                            <div class="codeboxwrapper">
+<!-- START -->
+
+<section>
+
+    <!-- vs -->
+    <section>
+        <h2>Functions Used in this Presentation</h2>
+        <div class="codeboxwrapper">
                             <pre><code id="vs-code" class="language-javascript" contenteditable>
-function quickFn(val) {
-    return val + 99;
-}
+                                function quickFn(val) {
+                                return val + 99;
+                                }
 
-function slowFn(val) {
-    setTimeout(function () {
-        return val + 99;
-    }, 2000);
-}
+                                function slowFn(val) {
+                                setTimeout(function () {
+                                return val + 99;
+                                }, 2000);
+                                }
 
-function wait(ms) {
-    var deferred = $.Deferred();
-    setTimeout(deferred.resolve, ms);
+                                function wait(ms) {
+                                var deferred = $.Deferred();
+                                setTimeout(deferred.resolve, ms);
 
-    return deferred.promise();
-}
+                                return deferred.promise();
+                                }
                             </code></pre>
-                        </div>
-                    </section>
+        </div>
+    </section>
 
-                </section>
+</section>
 
-                <section>
+<section>
 
-                <!-- sync -->
-                    <section data-state="deferred-sync">
-                        <h2>What's the value?</h2>
-                        <p>How do I benefit? When would I use this?</p>
-                    </section>
+    <!-- sync -->
+    <section data-state="deferred-sync">
+        <h2>What's the value?</h2>
+        <p>How do I benefit? When would I use this?</p>
+    </section>
 
-                <!-- sync -->
-                    <section data-state="deferred-sync">
-                        <h2>Synchronous</h2>
-                        <p>Fast</p>
-                            <div class="codeboxwrapper">
+    <!-- sync -->
+    <section data-state="deferred-sync">
+        <h2>Synchronous</h2>
+        <p>Fast</p>
+        <div class="codeboxwrapper">
                             <pre><code id="sync-code" class="language-javascript" contenteditable>
-a = 1;
-sandlog("1: " + a);
+                                a = 1;
+                                sandlog("1: " + a);
 
-a = a + quickFn(a);
-sandlog("2: " + a);
+                                a = a + quickFn(a);
+                                sandlog("2: " + a);
 
-sandlog("3: not even a noticable wait");
+                                sandlog("3: not even a noticable wait");
                             </code></pre>
-                            <div class="sync sandbox">a = ?</div>
-                        </div>
-                    </section>
+            <div class="sync sandbox">a = ?</div>
+        </div>
+    </section>
 
-                <!-- async -->
-                    <section data-state="deferred-async">
-                        <h2>Asynchronous</h2>
-                        <p>&#9786;</p>
-                            <div class="codeboxwrapper">
+    <!-- async -->
+    <section data-state="deferred-async">
+        <h2>Asynchronous</h2>
+        <p>&#9786;</p>
+        <div class="codeboxwrapper">
                             <pre><code id="async-code" class="language-javascript" contenteditable>
-sandlog("1: I'm first");
+                                sandlog("1: I'm first");
 
-setTimeout(function(){
-    sandlog("2: I'm slow...");
-}, 2000);
+                                setTimeout(function(){
+                                sandlog("2: I'm slow...");
+                                }, 2000);
 
-sandlog("3: I didn't have to wait");
+                                sandlog("3: I didn't have to wait");
                             </code></pre>
-                            <div class="async sandbox">a = ?</div>
-                        </div>
-                    </section>
+            <div class="async sandbox">a = ?</div>
+        </div>
+    </section>
 
 
-                    <!-- async -->
-                    <section data-state="deferred-aresult">
-                        <h2>Asynchronous Result?</h2>
-                        <p>&#9785;</p>
-                            <div class="codeboxwrapper">
+    <!-- async -->
+    <section data-state="deferred-aresult">
+        <h2>Asynchronous Result?</h2>
+        <p>&#9785;</p>
+        <div class="codeboxwrapper">
                             <pre><code id="aresult-code" class="language-javascript" contenteditable>
-a = 'initial';
+                                a = 'initial';
 
-sandlog("1: a = " + a);
+                                sandlog("1: a = " + a);
 
-setTimeout(function(){
-    a = 'affected';
-    sandlog("2: a = " + a);
-}, 2000);
+                                setTimeout(function(){
+                                a = 'affected';
+                                sandlog("2: a = " + a);
+                                }, 2000);
 
-sandlog("3: a = " + a);
+                                sandlog("3: a = " + a);
                             </code></pre>
-                            <div class="aresult sandbox">a = ?</div>
-                        </div>
-                    </section>
-                </section>
+            <div class="aresult sandbox">a = ?</div>
+        </div>
+    </section>
+</section>
 
-                <section>
-                <!-- promise spec -->
-                    <section>
-                        <h2>Promise Spec (1 of 2)</h2>
-                        <p>A Promise's states: unfulfilled, fulfilled, and failed</p>
-                        <ul style="font-size: 60%; color:#888;">
-                            <li>A promise represents the eventual value returned from the single completion of an operation.</li>
-                            <li>A promise may be in one of the three states, unfulfilled, fulfilled, and failed.</li>
-                            <li>Once a promise is fulfilled or failed, the promise's value MUST not be changed, just as a values in JavaScript, primitives and object identities, can not change.</li>
-                        </ul>
-                        <br/>
-                        <p><a href="http://wiki.commonjs.org/wiki/Promises/A" target="_blank">http://wiki.commonjs.org/wiki/Promises/A</a></p>
-                    </section>
+<section>
+    <!-- promise spec -->
+    <section>
+        <h2>Promise Spec (1 of 2)</h2>
+        <p>A Promise's states: unfulfilled, fulfilled, and failed</p>
+        <ul style="font-size: 60%; color:#888;">
+            <li>A promise represents the eventual value returned from the single completion of an operation.</li>
+            <li>A promise may be in one of the three states, unfulfilled, fulfilled, and failed.</li>
+            <li>Once a promise is fulfilled or failed, the promise's value MUST not be changed, just as a values in JavaScript, primitives and object identities, can not change.</li>
+        </ul>
+        <br/>
+        <p><a href="http://wiki.commonjs.org/wiki/Promises/A" target="_blank">http://wiki.commonjs.org/wiki/Promises/A</a></p>
+    </section>
 
-                    <section>
-                        <h2>Promise Spec (2 of 2)</h2>
-                        <p>Implement a Promise's interface with these specs</p>
-                        <ul style="font-size: 60%; color:#888;">
-                            <li>This API only defines the necessary interface that a promise must provide for promise consumers to interact with it.</li>
-                            <li>Implementors are free to define how promises are generated.</li>
-                            <li>Some promises may be provide their own functions to fulfill the promise, and other promises may be fulfilled by mechanisms that are not visible to the promise consumer.</li>
-                        </ul>
-                        <br/>
-                        <p><a href="http://wiki.commonjs.org/wiki/Promises/A" target="_blank">http://wiki.commonjs.org/wiki/Promises/A</a></p>
-                    </section>
+    <section>
+        <h2>Promise Spec (2 of 2)</h2>
+        <p>Implement a Promise's interface with these specs</p>
+        <ul style="font-size: 60%; color:#888;">
+            <li>This API only defines the necessary interface that a promise must provide for promise consumers to interact with it.</li>
+            <li>Implementors are free to define how promises are generated.</li>
+            <li>Some promises may be provide their own functions to fulfill the promise, and other promises may be fulfilled by mechanisms that are not visible to the promise consumer.</li>
+        </ul>
+        <br/>
+        <p><a href="http://wiki.commonjs.org/wiki/Promises/A" target="_blank">http://wiki.commonjs.org/wiki/Promises/A</a></p>
+    </section>
 
-                <!-- old save pattern -->
-                    <section>
-                        <h2>Old Save Pattern</h2>
-                        <p>Hey, I know this stuff</p>
+    <!-- old save pattern -->
+    <section>
+        <h2>Old Save Pattern</h2>
+        <p>Hey, I know this stuff</p>
                         <pre><code class="language-javascript" contenteditable>
-// not runnable
+                            // not runnable
 
-object.save({ key: value }, {
-    success: function(object) {
-        // the object was saved.
-    },
-    error: function(object, error) {
-        // saving the object failed.
-    }
-});
+                            object.save({ key: value }, {
+                            success: function(object) {
+                            // the object was saved.
+                            },
+                            error: function(object, error) {
+                            // saving the object failed.
+                            }
+                            });
                         </code></pre>
-                    </section>
-                <!-- new save pattern -->
-                    <section>
-                        <h2>New Save Pattern</h2>
-                        <p>Looks pretty similar, right?</p>
+    </section>
+    <!-- new save pattern -->
+    <section>
+        <h2>New Save Pattern</h2>
+        <p>Looks pretty similar, right?</p>
                         <pre><code class="language-javascript" contenteditable>
-// not runnable
+                            // not runnable
 
-object.save({ key: value }).then(
-    function(object) {
-        // the object was saved.
-    },
-    function(error) {
-        // saving the object failed.
-    }
-);
+                            object.save({ key: value }).then(
+                            function(object) {
+                            // the object was saved.
+                            },
+                            function(error) {
+                            // saving the object failed.
+                            }
+                            );
                         </code></pre>
-                    </section>
+    </section>
 
-                    <!-- old save pattern -->
-                    <section>
-                        <h2>Old Chain Pattern</h2>
-                        <p>Using the old pattern without Promises</p>
-                        <p>...and this doesn't include error handling!</p>
+    <!-- old save pattern -->
+    <section>
+        <h2>Old Chain Pattern</h2>
+        <p>Using the old pattern without Promises</p>
+        <p>...and this doesn't include error handling!</p>
                         <pre><code class="language-javascript" contenteditable>
-// not runnable
+                            // not runnable
 
-Parse.User.logIn("user", "pass", {
-    success: function(user) {
-        query.find({
-            success: function(results) {
-                results[0].save({ key: value }, {
-                    success: function(result) {
-                        // the object was saved.
-                    }
-                });
-            }
-        });
-    }
-});
+                            Parse.User.logIn("user", "pass", {
+                            success: function(user) {
+                            query.find({
+                            success: function(results) {
+                            results[0].save({ key: value }, {
+                            success: function(result) {
+                            // the object was saved.
+                            }
+                            });
+                            }
+                            });
+                            }
+                            });
                         </code></pre>
-                    </section>
-                    <!-- new chain pattern -->
-                    <section>
-                        <h2>New Chain Pattern</h2>
-                        <p>Now using Promises</p>
-                        <p>... it's much cleaner!</p>
+    </section>
+    <!-- new chain pattern -->
+    <section>
+        <h2>New Chain Pattern</h2>
+        <p>Now using Promises</p>
+        <p>... it's much cleaner!</p>
                         <pre><code class="language-javascript" contenteditable>
-// not runnable
+                            // not runnable
 
-Parse.User.logIn("user", "pass").then(function(user) {
-    return query.find();
-}).then(function(results) {
-    return results[0].save({ key: value });
-}).then(function(result) {
-    // the object was saved.
-});
+                            Parse.User.logIn("user", "pass").then(function(user) {
+                            return query.find();
+                            }).then(function(results) {
+                            return results[0].save({ key: value });
+                            }).then(function(result) {
+                            // the object was saved.
+                            });
                         </code></pre>
-                        <p style="font-size: 60%;"><a href="http://blog.parse.com/2013/01/29/whats-so-great-about-javascript-promises/" target="_blank">See it with error handling</a></p>
-                    </section>
+        <p style="font-size: 60%;"><a href="http://blog.parse.com/2013/01/29/whats-so-great-about-javascript-promises/" target="_blank">See it with error handling</a></p>
+    </section>
 
-                </section>
+</section>
 
-                <section>
+<section>
 
-                    <!-- $.Deferred spec -->
-                    <section>
-                        <h2>$.Deferred() Spec</h2>
-                        <ul>A constructor function that returns a chainable utility object with methods to
-                            <li>register multiple callbacks into callback queues, invoke callback queues, </li>
-                            <li>and relay the <i>success</i> or <i>failure</i> state of any synchronous or asynchronous function.</li>
-                        </ul>
-                        <p style="font-size:60%;"><a href="http://api.jquery.com/jQuery.Deferred/">jQuery Deferred Spec</a></p>
-                    </section>
+    <!-- $.Deferred spec -->
+    <section>
+        <h2>$.Deferred() Spec</h2>
+        <ul>A constructor function that returns a chainable utility object with methods to
+            <li>register multiple callbacks into callback queues, invoke callback queues, </li>
+            <li>and relay the <i>success</i> or <i>failure</i> state of any synchronous or asynchronous function.</li>
+        </ul>
+        <p style="font-size:60%;"><a href="http://api.jquery.com/jQuery.Deferred/">jQuery Deferred Spec</a></p>
+    </section>
 
-                    <!-- regcallbacks -->
-                    <section data-state="deferred-regcallbacks">
-                        <h2>Register multiple callbacks into callback queues and invoke</h2>
-                        <p>(remember the chain pattern?)</p>
-                        <div class="codeboxwrapper" style="font-size: 75%; line-height: 1.25em;">
+    <!-- regcallbacks -->
+    <section data-state="deferred-regcallbacks">
+        <h2>Register multiple callbacks into callback queues and invoke</h2>
+        <p>(remember the chain pattern?)</p>
+        <div class="codeboxwrapper" style="font-size: 75%; line-height: 1.25em;">
                             <pre><code id="regcallbacks-code" class="language-javascript" contenteditable>
-function asyncFn(a) {
-    a++;
-    var dfd = $.Deferred();
-    setTimeout(function () {
-        dfd.resolveWith(this, [a]);
-    }, 2000);
-    return dfd;
-}
+                                function asyncFn(a) {
+                                a++;
+                                var dfd = $.Deferred();
+                                setTimeout(function () {
+                                dfd.resolveWith(this, [a]);
+                                }, 2000);
+                                return dfd;
+                                }
 
-var a = 1;
-sandlog('sync1: a = ' + a);
+                                var a = 1;
+                                sandlog('sync1: a = ' + a);
 
-asyncFn(a).then(function(a) {
-    sandlog('async2: a = ' + a);
-    return asyncFn(a);
-}).then(function(a) {
-    sandlog('async3: a = ' + a);
-    return asyncFn(a);
-});
+                                asyncFn(a).then(function(a) {
+                                sandlog('async2: a = ' + a);
+                                return asyncFn(a);
+                                }).then(function(a) {
+                                sandlog('async3: a = ' + a);
+                                return asyncFn(a);
+                                });
 
-sandlog('seq2: a = ' + a);
+                                sandlog('seq2: a = ' + a);
                             </code></pre>
-                            <div class="regcallbacks sandbox">a = ?</div>
-                        </div>
-                    </section>
+            <div class="regcallbacks sandbox">a = ?</div>
+        </div>
+    </section>
 
-                    <!-- relaystate -->
-                    <section data-state="deferred-relaystate">
-                        <h2>Relay the success or failure state of any sync or async function</h2>
-                            <div class="codeboxwrapper">
+    <!-- relaystate -->
+    <section data-state="deferred-relaystate">
+        <h2>Relay the success or failure state of any sync or async function</h2>
+        <div class="codeboxwrapper">
                             <pre><code id="relaystate-code" class="language-javascript" contenteditable>
-function asyncSuccess(bool) {
-    var dfd = $.Deferred();
-    setTimeout(function () {
-        bool ? dfd.resolve() : dfd.reject();
-    }, 2000);
-    return dfd;
-}
+                                function asyncSuccess(bool) {
+                                var dfd = $.Deferred();
+                                setTimeout(function () {
+                                bool ? dfd.resolve() : dfd.reject();
+                                }, 2000);
+                                return dfd;
+                                }
 
-asyncSuccess(true).done(function () {
-    sandlog('success');
-}).fail(function () {
-    sandlog('fail');
-});
+                                asyncSuccess(true).done(function () {
+                                sandlog('success');
+                                }).fail(function () {
+                                sandlog('fail');
+                                });
                             </code></pre>
-                            <div class="relaystate sandbox">a = ?</div>
-                        </div>
-                    </section>
+            <div class="relaystate sandbox">a = ?</div>
+        </div>
+    </section>
 
-                </section>
+</section>
 
-                <section>
+<section>
 
-            <!-- $.Deferred intro -->
-                <section>
-                    <h2>$.Deferred() spec</h2>
-                    <p><a href="http://api.jquery.com/jQuery.Deferred/" target="_blank">http://api.jquery.com/jQuery.Deferred/</a></p>
-                </section>
+    <!-- $.Deferred intro -->
+    <section>
+        <h2>$.Deferred() spec</h2>
+        <p><a href="http://api.jquery.com/jQuery.Deferred/" target="_blank">http://api.jquery.com/jQuery.Deferred/</a></p>
+    </section>
 
-            <!-- $.Deferred done() -->
-                <section data-state="deferred-done">
-                    <h2>.done()</h2>
-                    <p>Add handlers to be called when the Deferred object is resolved.</p>
-                    <div class="codeboxwrapper">
+    <!-- $.Deferred done() -->
+    <section data-state="deferred-done">
+        <h2>.done()</h2>
+        <p>Add handlers to be called when the Deferred object is resolved.</p>
+        <div class="codeboxwrapper">
                             <pre><code id="done-code" class="language-javascript" contenteditable>
-asyncSuccess(true).done(function () {
-    sandlog('success');
-});
+                                asyncSuccess(true).done(function () {
+                                sandlog('success');
+                                });
                             </code></pre>
-                        <div class="done sandbox">a = ?</div>
-                    </div>
-                </section>
+            <div class="done sandbox">a = ?</div>
+        </div>
+    </section>
 
-                <!-- $.Deferred fail() -->
-                    <section data-state="deferred-fail">
-                        <h2>.fail()</h2>
-                        <p>Add handlers to be called when the Deferred object is rejected.</p>
-                        <div class="codeboxwrapper">
+    <!-- $.Deferred fail() -->
+    <section data-state="deferred-fail">
+        <h2>.fail()</h2>
+        <p>Add handlers to be called when the Deferred object is rejected.</p>
+        <div class="codeboxwrapper">
                             <pre><code id="fail-code" class="language-javascript" contenteditable>
-asyncSuccess(false).fail(function () {
-    sandlog('fail');
-});
+                                asyncSuccess(false).fail(function () {
+                                sandlog('fail');
+                                });
                             </code></pre>
-                            <div class="fail sandbox">a = ?</div>
-                        </div>
-                    </section>
+            <div class="fail sandbox">a = ?</div>
+        </div>
+    </section>
 
-                <!-- $.Deferred then() -->
-                    <section data-state="deferred-then">
-                        <h2>.then()</h2>
-                        <p>Add handlers to be called when the Deferred object is either resolved or rejected.</p>
-                        <div class="codeboxwrapper">
+    <!-- $.Deferred then() -->
+    <section data-state="deferred-then">
+        <h2>.then()</h2>
+        <p>Add handlers to be called when the Deferred object is either resolved or rejected.</p>
+        <div class="codeboxwrapper">
                             <pre><code id="then-code" class="language-javascript" contenteditable>
-asyncSuccess(true).done(function () {
-    sandlog('success');
-}).fail(function () {
-    sandlog('fail');
-}).then(function () {
-    sandlog('then');
-});
+                                asyncSuccess(true).done(function () {
+                                sandlog('success');
+                                }).fail(function () {
+                                sandlog('fail');
+                                }).then(function () {
+                                sandlog('then');
+                                });
                             </code></pre>
-                            <div class="then sandbox">a = ?</div>
-                        </div>
-                    </section>
+            <div class="then sandbox">a = ?</div>
+        </div>
+    </section>
 
-                <!-- $.Deferred always() -->
-                    <section data-state="deferred-always">
-                        <h2>.always()</h2>
-                        <p>Add handlers to be called when the Deferred object is resolved, rejected, or still in progress.</p>
-                        <div class="codeboxwrapper">
+    <!-- $.Deferred always() -->
+    <section data-state="deferred-always">
+        <h2>.always()</h2>
+        <p>Add handlers to be called when the Deferred object is resolved, rejected, or still in progress.</p>
+        <div class="codeboxwrapper">
                             <pre><code id="always-code" class="language-javascript" contenteditable>
-asyncSuccess(false).done(function () {
-    sandlog('success');
-}).fail(function () {
-    sandlog('fail');
-}).always(function () {
-    sandlog('always');
-});
+                                asyncSuccess(false).done(function () {
+                                sandlog('success');
+                                }).fail(function () {
+                                sandlog('fail');
+                                }).always(function () {
+                                sandlog('always');
+                                });
                             </code></pre>
-                            <div class="always sandbox">a = ?</div>
-                        </div>
-                    </section>
+            <div class="always sandbox">a = ?</div>
+        </div>
+    </section>
 
-                <!-- $.Deferred resolve() -->
-                    <section data-state="deferred-resolve">
-                        <h2>.resolve()</h2>
-                        <p>Resolve a Deferred object and call any doneCallbacks with the given args.</p>
-                        <div class="codeboxwrapper">
+    <!-- $.Deferred resolve() -->
+    <section data-state="deferred-resolve">
+        <h2>.resolve()</h2>
+        <p>Resolve a Deferred object and call any doneCallbacks with the given args.</p>
+        <div class="codeboxwrapper">
                             <pre><code id="resolve-code" class="language-javascript" contenteditable>
-function dfdState() {
-    var dfd = $.Deferred();
-    setTimeout(function () {
-        dfd.resolve();
-    }, 2000);
-    return dfd;
-}
-dfdState().done(function () {
-    sandlog('success');
-});
+                                function dfdState() {
+                                var dfd = $.Deferred();
+                                setTimeout(function () {
+                                dfd.resolve();
+                                }, 2000);
+                                return dfd;
+                                }
+                                dfdState().done(function () {
+                                sandlog('success');
+                                });
                             </code></pre>
-                            <div class="resolve sandbox">a = ?</div>
-                        </div>
-                    </section>
+            <div class="resolve sandbox">a = ?</div>
+        </div>
+    </section>
 
-                <!-- $.Deferred resolveWith() -->
-                    <section data-state="deferred-resolvewith">
-                        <h2>.resolveWith()</h2>
-                        <p>Resolve a Deferred object and call any doneCallbacks with the given context and args.</p>
-                        <div class="codeboxwrapper">
+    <!-- $.Deferred resolveWith() -->
+    <section data-state="deferred-resolvewith">
+        <h2>.resolveWith()</h2>
+        <p>Resolve a Deferred object and call any doneCallbacks with the given context and args.</p>
+        <div class="codeboxwrapper">
                             <pre><code id="resolvewith-code" class="language-javascript" contenteditable>
-function dfdState() {
-    var dfd = $.Deferred();
-    setTimeout(function () {
-        dfd.resolveWith(this, ['val1']);
-    }, 2000);
-    return dfd;
-}
-dfdState().done(function (args) {
-    sandlog('success + ' + args);
-});
+                                function dfdState() {
+                                var dfd = $.Deferred();
+                                setTimeout(function () {
+                                dfd.resolveWith(this, ['val1']);
+                                }, 2000);
+                                return dfd;
+                                }
+                                dfdState().done(function (args) {
+                                sandlog('success + ' + args);
+                                });
                             </code></pre>
-                            <div class="resolvewith sandbox">a = ?</div>
-                        </div>
-                    </section>
+            <div class="resolvewith sandbox">a = ?</div>
+        </div>
+    </section>
 
-                <!-- $.Deferred reject() -->
-                    <section data-state="deferred-reject">
-                        <h2>.reject()</h2>
-                        <p>Reject a Deferred object and call any failCallbacks with the given args.</p>
-                        <div class="codeboxwrapper">
+    <!-- $.Deferred reject() -->
+    <section data-state="deferred-reject">
+        <h2>.reject()</h2>
+        <p>Reject a Deferred object and call any failCallbacks with the given args.</p>
+        <div class="codeboxwrapper">
                             <pre><code id="reject-code" class="language-javascript" contenteditable>
-function dfdState() {
-    var dfd = $.Deferred();
-    setTimeout(function () {
-        dfd.reject();
-    }, 2000);
-    return dfd;
-}
-dfdState().fail(function () {
-    sandlog('fail');
-});
+                                function dfdState() {
+                                var dfd = $.Deferred();
+                                setTimeout(function () {
+                                dfd.reject();
+                                }, 2000);
+                                return dfd;
+                                }
+                                dfdState().fail(function () {
+                                sandlog('fail');
+                                });
                             </code></pre>
-                            <div class="reject sandbox">a = ?</div>
-                        </div>
-                    </section>
+            <div class="reject sandbox">a = ?</div>
+        </div>
+    </section>
 
 
-                <!-- $.Deferred rejectwith() -->
-                    <section data-state="deferred-rejectwith">
-                        <h2>.rejectWith()</h2>
-                        <p>Reject a Deferred object and call any failCallbacks with the given context and args.</p>
-                        <div class="codeboxwrapper">
+    <!-- $.Deferred rejectwith() -->
+    <section data-state="deferred-rejectwith">
+        <h2>.rejectWith()</h2>
+        <p>Reject a Deferred object and call any failCallbacks with the given context and args.</p>
+        <div class="codeboxwrapper">
                                 <pre><code id="rejectwith-code" class="language-javascript" contenteditable>
-function dfdState() {
-    var dfd = $.Deferred();
-    setTimeout(function () {
-        dfd.rejectWith(this, ['val1']);
-    }, 2000);
-    return dfd;
-}
-dfdState().fail(function (args) {
-    sandlog('fail + ' + args);
-})
+                                    function dfdState() {
+                                    var dfd = $.Deferred();
+                                    setTimeout(function () {
+                                    dfd.rejectWith(this, ['val1']);
+                                    }, 2000);
+                                    return dfd;
+                                    }
+                                    dfdState().fail(function (args) {
+                                    sandlog('fail + ' + args);
+                                    })
                                 </code></pre>
-                            <div class="rejectwith sandbox">a = ?</div>
-                        </div>
-                    </section>
-                <!-- $.Deferred when() -->
-                    <section data-state="deferred-when">
-                        <h2>$.when()</h2>
-                        <div class="codeboxwrapper">
+            <div class="rejectwith sandbox">a = ?</div>
+        </div>
+    </section>
+    <!-- $.Deferred when() -->
+    <section data-state="deferred-when">
+        <h2>$.when()</h2>
+        <div class="codeboxwrapper">
                             <pre><code id="when-code" style="font-size: 90%; line-height: 1.2em" class="language-javascript" contenteditable>
-$.when(wait(1000), wait(2000))
-.done(function () {
-    sandlog('both done');
-});
+                                $.when(wait(1000), wait(2000))
+                                .done(function () {
+                                sandlog('both done');
+                                });
                             </code></pre>
-                            <div class="when sandbox"></div>
-                        </div>
-                    </section>
+            <div class="when sandbox"></div>
+        </div>
+    </section>
 
-                </section>
+</section>
 
-                <section>
+<section>
 
-                <!-- blocking functions -->
-                    <section data-state="deferred-block">
-                        <h2>Blocking</h2>
-                            <div class="codeboxwrapper">
+    <!-- blocking functions -->
+    <section data-state="deferred-block">
+        <h2>Blocking</h2>
+        <div class="codeboxwrapper">
                             <pre><code id="block-code" class="language-javascript" contenteditable>
-function blockingFn(val) {
-    // any blocking call: endpoint delay, UI action, loading, slow function...
-    alert('blocking until closed');
-    return val + 99;
-}
-a = 1;
-sandlog("1: a = " + a);
-a = a + blockingFn(a);
-sandlog("2: waited for blocked: a = " + a);
-sandlog("3: why did I also have to wait?");
+                                function blockingFn(val) {
+                                // any blocking call: endpoint delay, UI action, loading, slow function...
+                                alert('blocking until closed');
+                                return val + 99;
+                                }
+                                a = 1;
+                                sandlog("1: a = " + a);
+                                a = a + blockingFn(a);
+                                sandlog("2: waited for blocked: a = " + a);
+                                sandlog("3: why did I also have to wait?");
                             </code></pre>
-                            <div class="block sandbox">a = ?</div>
-                        </div>
-                    </section>
+            <div class="block sandbox">a = ?</div>
+        </div>
+    </section>
 
-                <!-- nonblocking functions -->
-                    <section data-state="deferred-nonblock">
-                        <h2>Non-Blocking</h2>
-                                <div class="codeboxwrapper">
+    <!-- nonblocking functions -->
+    <section data-state="deferred-nonblock">
+        <h2>Non-Blocking</h2>
+        <div class="codeboxwrapper">
                             <pre><code id="nonblock-code" class="language-javascript" contenteditable>
-function nonBlockingFn(val) {
-    var dfd = $.Deferred();
-    // any blocking call
-    setTimeout(function () {
-        dfd.resolveWith(this, [val + 99]);
-    }, 2000);
-    return dfd;
-}
-a = 1;
-sandlog("1: a = " + a);
-nonBlockingFn(a).done(function (aResult) {
-    a = a + aResult;
-    sandlog("2: waited for blocked: a = " + a);
-});
-sandlog("3: I wasn't blocked!");
-                                </code></pre>
-                            <div class="nonblock sandbox">a = ?</div>
-                        </div>
-                    </section>
-                </section>
+                                function nonBlockingFn(val) {
+                                var dfd = $.Deferred();
+                                // any blocking call
+                                setTimeout(function () {
+                                dfd.resolveWith(this, [val + 99]);
+                                }, 2000);
+                                return dfd;
+                                }
+                                a = 1;
+                                sandlog("1: a = " + a);
+                                nonBlockingFn(a).done(function (aResult) {
+                                a = a + aResult;
+                                sandlog("2: waited for blocked: a = " + a);
+                                });
+                                sandlog("3: I wasn't blocked!");
+                            </code></pre>
+            <div class="nonblock sandbox">a = ?</div>
+        </div>
+    </section>
+</section>
 
-                <section>
+<section>
 
-                <!-- coupled callbacks -->
-                    <section data-state="deferred-coupled">
-                        <h2>Tighly Coupled Callbacks</h2>
-                            <div class="codeboxwrapper">
+    <!-- coupled callbacks -->
+    <section data-state="deferred-coupled">
+        <h2>Tighly Coupled Callbacks</h2>
+        <div class="codeboxwrapper">
                             <pre><code id="coupled-code" class="language-javascript" contenteditable>
-sandlog('1 started');
+                                sandlog('1 started');
 
-wait(2000).then(function () {
-    sandlog('1 ended');
-    }).then(function () {
-        sandlog('2 started');
+                                wait(2000).then(function () {
+                                sandlog('1 ended');
+                                }).then(function () {
+                                sandlog('2 started');
 
-    return wait(2000).done(function () {
-        sandlog('2 ended');
-    });
-});
+                                return wait(2000).done(function () {
+                                sandlog('2 ended');
+                                });
+                                });
                             </code></pre>
-                            <div class="coupled sandbox"></div>
-                        </div>
-                    </section>
+            <div class="coupled sandbox"></div>
+        </div>
+    </section>
 
-                <!-- decoupled callbacks -->
-                    <section data-state="deferred-decoupled">
-                        <h2>Decoupled Callbacks</h2>
-                            <div class="codeboxwrapper">
+    <!-- decoupled callbacks -->
+    <section data-state="deferred-decoupled">
+        <h2>Decoupled Callbacks</h2>
+        <div class="codeboxwrapper">
                             <pre><code id="decoupled-code" style="font-size: 90%; line-height: 1.2em" class="language-javascript" contenteditable>
-sandlog('1 started');
+                                sandlog('1 started');
 
-var dfd1 = wait(2000);
+                                var dfd1 = wait(2000);
 
-dfd1.done(function () {
-    sandlog('1 ended');
-});
+                                dfd1.done(function () {
+                                sandlog('1 ended');
+                                });
 
-var dfd2 = dfd1.then(function () {
-    sandlog('2 started');
-    return wait(2000);
-}, function () { /* fail */ },
-function () { /* progress */ }
-);
+                                var dfd2 = dfd1.then(function () {
+                                sandlog('2 started');
+                                return wait(2000);
+                                }, function () { /* fail */ },
+                                function () { /* progress */ }
+                                );
 
-dfd2.done(function () {
-    sandlog('2 ended');
-});
+                                dfd2.done(function () {
+                                sandlog('2 ended');
+                                });
                             </code></pre>
-                            <div class="decoupled sandbox"></div>
-                        </div>
-                    </section>
+            <div class="decoupled sandbox"></div>
+        </div>
+    </section>
 
-                <!-- multi callbacks -->
-                    <section data-state="deferred-multi">
-                        <h2>Multiple Callbacks</h2>
-                        <div class="codeboxwrapper">
+    <!-- multi callbacks -->
+    <section data-state="deferred-multi">
+        <h2>Multiple Callbacks</h2>
+        <div class="codeboxwrapper">
                                 <pre><code id="multi-code" class="language-javascript" contenteditable>
-sandlog('started');
-var dfd = wait(2000);
+                                    sandlog('started');
+                                    var dfd = wait(2000);
 
-dfd.done(function () {
-    sandlog('ended A');
-});
+                                    dfd.done(function () {
+                                    sandlog('ended A');
+                                    });
 
-dfd.done(function () {
-    sandlog('ended B');
-});
+                                    dfd.done(function () {
+                                    sandlog('ended B');
+                                    });
                                 </code></pre>
-                            <div class="multi sandbox"></div>
-                        </div>
-                    </section>
+            <div class="multi sandbox"></div>
+        </div>
+    </section>
 
-                <!-- decoupled callbacks -->
-                    <section data-state="deferred-callrefs">
-                        <h2>Callback References</h2>
-                        <div class="codeboxwrapper">
+    <!-- decoupled callbacks -->
+    <section data-state="deferred-callrefs">
+        <h2>Callback References</h2>
+        <div class="codeboxwrapper">
                                 <pre><code id="callrefs-code" class="language-javascript" contenteditable>
-var i = 1;
+                                    var i = 1;
 
-function logDone() {
-    sandlog('done ' + i++);
-}
+                                    function logDone() {
+                                    sandlog('done ' + i++);
+                                    }
 
-var dfd = wait(2000);
+                                    var dfd = wait(2000);
 
-dfd.done(logDone);
-dfd.done(logDone);
+                                    dfd.done(logDone);
+                                    dfd.done(logDone);
                                 </code></pre>
-                            <div class="callrefs sandbox"></div>
-                        </div>
-                    </section>
-                </section>
+            <div class="callrefs sandbox"></div>
+        </div>
+    </section>
+</section>
 
-                <!-- $.Deferred chaining -->
+<!-- $.Deferred chaining -->
 
-                <!-- $.Deferred ex:fetch() -->
-                <!-- $.Deferred ex:button click -->
-                <!-- $.Deferred ex:css3 transition end -->
+<!-- $.Deferred ex:fetch() -->
+<!-- $.Deferred ex:button click -->
+<!-- $.Deferred ex:css3 transition end -->
 
 
-                <section>
-                    <h2>$.Deferred() and Beyond</h2>
-                    <h3> <span class="mw-headline" id="Libraries"> Libraries </span></h3>
-                    <ul style="font-size: 80%">
-                        <li> <a rel="nofollow" class="external text" href="https://github.com/kriskowal/q">Q</a> Works in both NodeJS and browsers, compatible with jQuery, thenable, and usable as remote objects via message passing
-                        </li><li> <a rel="nofollow" class="external text" href="https://github.com/tildeio/rsvp.js">RSVP.js</a> A lightweight library that provides tools for organizing asynchronous code
-                        </li><li> <a rel="nofollow" class="external text" href="https://github.com/cujojs/when">when.js</a> Compact promises with joining and chaining
-                        </li><li> <a rel="nofollow" class="external text" href="https://github.com/kriszyp/node-promise">node-promise</a> Promises for NodeJS
-                        </li><li> <a rel="nofollow" class="external text" href="http://api.jquery.com/category/deferred-object/">jQuery 1.5</a> is said  to be 'based on the CommonJS Promises/A design'.
-                        </li><li> <a rel="nofollow" class="external text" href="https://github.com/ForbesLindesay/promises-a">ForbesLindesay/promises-a</a> A bare bones implementation of Promises/A intended to pass <a rel="nofollow" class="external free" href="https://github.com/domenic/promise-tests">https://github.com/domenic/promise-tests</a> while being as small as possible
-                        </li><li> <a rel="nofollow" class="external text" href="http://msdn.microsoft.com/en-us/library/windows/apps/br211867.aspx">WinJS / Windows 8 / Metro</a>
-                        </li>
-                    </ul>
-                </section>
+<section>
+    <h2>$.Deferred() and Beyond</h2>
+    <h3> <span class="mw-headline" id="Libraries"> Libraries </span></h3>
+    <ul style="font-size: 80%">
+        <li> <a rel="nofollow" class="external text" href="https://github.com/kriskowal/q">Q</a> Works in both NodeJS and browsers, compatible with jQuery, thenable, and usable as remote objects via message passing
+        </li><li> <a rel="nofollow" class="external text" href="https://github.com/tildeio/rsvp.js">RSVP.js</a> A lightweight library that provides tools for organizing asynchronous code
+    </li><li> <a rel="nofollow" class="external text" href="https://github.com/cujojs/when">when.js</a> Compact promises with joining and chaining
+    </li><li> <a rel="nofollow" class="external text" href="https://github.com/kriszyp/node-promise">node-promise</a> Promises for NodeJS
+    </li><li> <a rel="nofollow" class="external text" href="http://api.jquery.com/category/deferred-object/">jQuery 1.5</a> is said  to be 'based on the CommonJS Promises/A design'.
+    </li><li> <a rel="nofollow" class="external text" href="https://github.com/ForbesLindesay/promises-a">ForbesLindesay/promises-a</a> A bare bones implementation of Promises/A intended to pass <a rel="nofollow" class="external free" href="https://github.com/domenic/promise-tests">https://github.com/domenic/promise-tests</a> while being as small as possible
+    </li><li> <a rel="nofollow" class="external text" href="http://msdn.microsoft.com/en-us/library/windows/apps/br211867.aspx">WinJS / Windows 8 / Metro</a>
+    </li>
+    </ul>
+</section>
 
 <!--
 <div class="d3-slides">
@@ -1205,115 +1205,115 @@ g.selectAll('rect')
 
 
 
-                <section>
-                    <h2>References</h2>
-                    <p>Credit where it's due</p>
-                    <ul>
-                        <li><a href="http://blog.mediumequalsmessage.com/promise-deferred-objects-in-javascript-pt2-practical-use" target="_blank">
-                            http://blog.mediumequalsmessage.com/promise-deferred-objects-in-javascript-pt2-practical-use
-                        </a></li>
-                        <li><a href="http://blog.parse.com/2013/01/29/whats-so-great-about-javascript-promises/" target="_blank">
-                            http://blog.parse.com/2013/01/29/whats-so-great-about-javascript-promises/
-                        </a></li>
-                    </ul>
-                </section>
+<section>
+    <h2>References</h2>
+    <p>Credit where it's due</p>
+    <ul>
+        <li><a href="http://blog.mediumequalsmessage.com/promise-deferred-objects-in-javascript-pt2-practical-use" target="_blank">
+            http://blog.mediumequalsmessage.com/promise-deferred-objects-in-javascript-pt2-practical-use
+        </a></li>
+        <li><a href="http://blog.parse.com/2013/01/29/whats-so-great-about-javascript-promises/" target="_blank">
+            http://blog.parse.com/2013/01/29/whats-so-great-about-javascript-promises/
+        </a></li>
+    </ul>
+</section>
 
-				<section>
-					<h2>Thank You</h2>
-					<h4>Evan Dana / edana@sapient.com</h4>
-				</section>
+<section>
+    <h2>Thank You</h2>
+    <h4>Evan Dana / edana@sapient.com</h4>
+</section>
 
-			</div>
+</div>
 
-		</div>
+</div>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.min.js"></script>
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.min.js"></script>
 
-        <!-- include d3.js -->
-        <script src="js/d3.v3/d3.v3.min.js"></script>
-        
-        <script src="js/util.js"></script>
-		<script>
-			// Full list of configuration options available here:
-			// https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				controls: true,
-				progress: true,
-				history: true,
-				center: true,
+<!-- include d3.js -->
+<script src="js/d3.v3/d3.v3.min.js"></script>
 
-				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+<script src="js/util.js"></script>
+<script>
+    // Full list of configuration options available here:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
 
-                multiplex: {
-                    // Example values. Generate your own.
-                    secret: '13823765895479871959', // Obtained from the socket.io server. Gives this (the master) control of the presentation
-                    id: 'd24f27081861582c', // Obtained from socket.io server
-                    url: 'reveal-presentation-template-c9-evandana_1.c9.io:80' // Location of socket.io server
-                },
-    
-				// Optional libraries used to extend on reveal.js
-				dependencies: [
-					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
-					{ src: 'js/socket.io.min.js', async: true },
-					{ src: 'plugin/multiplex/master.js', async: true }
-                    
-					// { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
-					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
-				]
-			});
-		</script>
-        <script src="js/piechart.js"></script>
-        <script src="lib/js/jquery.min.js"></script>
-        <!-- <script src="js/barchart.js"></script> -->
-        <script>
-            interactiveSlide('deferred-sync', 'sync', updateDeferred);
-            interactiveSlide('deferred-async', 'async', updateDeferred);
-            interactiveSlide('deferred-aresult', 'aresult', updateDeferred);
-            interactiveSlide('deferred-regcallbacks', 'regcallbacks', updateDeferred);
-            interactiveSlide('deferred-relaystate', 'relaystate', updateDeferred);
-            interactiveSlide('deferred-then', 'then', updateDeferred);
-            interactiveSlide('deferred-fail', 'fail', updateDeferred);
-            interactiveSlide('deferred-always', 'always', updateDeferred);
-            interactiveSlide('deferred-done', 'done', updateDeferred);
-            interactiveSlide('deferred-resolve', 'resolve', updateDeferred);
-            interactiveSlide('deferred-resolvewith', 'resolvewith', updateDeferred);
-            interactiveSlide('deferred-fail', 'fail', updateDeferred);
-            interactiveSlide('deferred-reject', 'reject', updateDeferred);
-            interactiveSlide('deferred-rejectwith', 'rejectwith', updateDeferred);
-            interactiveSlide('deferred-block', 'block', updateDeferred);
-            interactiveSlide('deferred-nonblock', 'nonblock', updateDeferred);
-            interactiveSlide('deferred-coupled', 'coupled', updateDeferred);
-            interactiveSlide('deferred-decoupled', 'decoupled', updateDeferred);
-            interactiveSlide('deferred-multi', 'multi', updateDeferred);
-            interactiveSlide('deferred-when', 'when', updateDeferred);
-            interactiveSlide('deferred-callrefs', 'callrefs', updateDeferred);
-            interactiveSlide('primitive-rect', 'rect', updateD3);
-            interactiveSlide('primitive-circle', 'circle', updateD3);
-            interactiveSlide('primitive-ellipse', 'ellipse', updateD3);
-            interactiveSlide('primitive-line', 'line', updateD3);
-            interactiveSlide('primitive-polyline', 'polyline', updateD3);
-            interactiveSlide('primitive-polygon', 'polygon', updateD3);
-            interactiveSlide('primitive-text', 'text', updateD3);
-            interactiveSlide('selection-select', 'select', updateD3);
-            interactiveSlide('selection-selectall', 'selectall', updateD3);
-            interactiveSlide('selection-data', 'data', updateD3);
-            interactiveSlide('data-update', 'update', updateData, {vscale: 0.9, hscale:0.9});
-            interactiveSlide('data-enter', 'enter', updateData, {vscale: 0.9, hscale:0.9});
-            interactiveSlide('data-exit', 'exit', updateData, {vscale: 0.9, hscale:0.9});
-            interactiveSlide('transition-trans-attr', 'trans-attr', updateD3);
-            interactiveSlide('transition-trans-style', 'trans-style', updateD3);
-            interactiveSlide('transition-delay', 'delay', updateD3);
-            interactiveSlide('transition-duration', 'duration', updateD3);
-            interactiveSlide('transition-combo', 'combo', updateD3);
-            interactiveSlide('data-table', 'table', updateTable, {container: 'table', parent: 'tr'});
-            interactiveSlide('deferred-one', 'one', updateDeferred);
-        </script>
-	</body>
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+        multiplex: {
+            // Example values. Generate your own.
+            secret: '13824152347292517204', // Obtained from the socket.io server. Gives this (the master) control of the presentation
+            id: '7665adb9a3b69ff3', // Obtained from socket.io server
+            url: 'presentation-reveal-deferred-c9-evandana_1.c9.io:80' // Location of socket.io server
+        },
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+            { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+            { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+            { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+            { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+            { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+            { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+            { src: 'js/socket.io.min.js', async: true },
+            { src: 'plugin/multiplex/master.js', async: true }
+
+            // { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+            // { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+    });
+</script>
+<script src="js/piechart.js"></script>
+<script src="lib/js/jquery.min.js"></script>
+<!-- <script src="js/barchart.js"></script> -->
+<script>
+    interactiveSlide('deferred-sync', 'sync', updateDeferred);
+    interactiveSlide('deferred-async', 'async', updateDeferred);
+    interactiveSlide('deferred-aresult', 'aresult', updateDeferred);
+    interactiveSlide('deferred-regcallbacks', 'regcallbacks', updateDeferred);
+    interactiveSlide('deferred-relaystate', 'relaystate', updateDeferred);
+    interactiveSlide('deferred-then', 'then', updateDeferred);
+    interactiveSlide('deferred-fail', 'fail', updateDeferred);
+    interactiveSlide('deferred-always', 'always', updateDeferred);
+    interactiveSlide('deferred-done', 'done', updateDeferred);
+    interactiveSlide('deferred-resolve', 'resolve', updateDeferred);
+    interactiveSlide('deferred-resolvewith', 'resolvewith', updateDeferred);
+    interactiveSlide('deferred-fail', 'fail', updateDeferred);
+    interactiveSlide('deferred-reject', 'reject', updateDeferred);
+    interactiveSlide('deferred-rejectwith', 'rejectwith', updateDeferred);
+    interactiveSlide('deferred-block', 'block', updateDeferred);
+    interactiveSlide('deferred-nonblock', 'nonblock', updateDeferred);
+    interactiveSlide('deferred-coupled', 'coupled', updateDeferred);
+    interactiveSlide('deferred-decoupled', 'decoupled', updateDeferred);
+    interactiveSlide('deferred-multi', 'multi', updateDeferred);
+    interactiveSlide('deferred-when', 'when', updateDeferred);
+    interactiveSlide('deferred-callrefs', 'callrefs', updateDeferred);
+    interactiveSlide('primitive-rect', 'rect', updateD3);
+    interactiveSlide('primitive-circle', 'circle', updateD3);
+    interactiveSlide('primitive-ellipse', 'ellipse', updateD3);
+    interactiveSlide('primitive-line', 'line', updateD3);
+    interactiveSlide('primitive-polyline', 'polyline', updateD3);
+    interactiveSlide('primitive-polygon', 'polygon', updateD3);
+    interactiveSlide('primitive-text', 'text', updateD3);
+    interactiveSlide('selection-select', 'select', updateD3);
+    interactiveSlide('selection-selectall', 'selectall', updateD3);
+    interactiveSlide('selection-data', 'data', updateD3);
+    interactiveSlide('data-update', 'update', updateData, {vscale: 0.9, hscale:0.9});
+    interactiveSlide('data-enter', 'enter', updateData, {vscale: 0.9, hscale:0.9});
+    interactiveSlide('data-exit', 'exit', updateData, {vscale: 0.9, hscale:0.9});
+    interactiveSlide('transition-trans-attr', 'trans-attr', updateD3);
+    interactiveSlide('transition-trans-style', 'trans-style', updateD3);
+    interactiveSlide('transition-delay', 'delay', updateD3);
+    interactiveSlide('transition-duration', 'duration', updateD3);
+    interactiveSlide('transition-combo', 'combo', updateD3);
+    interactiveSlide('data-table', 'table', updateTable, {container: 'table', parent: 'tr'});
+    interactiveSlide('deferred-one', 'one', updateDeferred);
+</script>
+</body>
 </html>
