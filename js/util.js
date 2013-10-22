@@ -17,7 +17,6 @@ debounce = function debounce(ms, ctx, fn) {
 
 _sandlog = function (codeElem) {
     return function (msg) {
-        console.log(codeElem.id);
         $(codeElem.parentElement.parentElement).find('.sandbox').append('<p>'+ msg +'</p>');
     };
 };

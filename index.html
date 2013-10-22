@@ -360,7 +360,7 @@ Parse.User.logIn("user", "pass").then(function(user) {
 
                     <!-- regcallbacks -->
                     <section data-state="deferred-regcallbacks">
-                        <h2>Register multiple callbacks into callback queues and invoke callback queues</h2>
+                        <h2>Register multiple callbacks into callback queues and invoke</h2>
                         <p>(remember the chain pattern?)</p>
                         <div class="codeboxwrapper" style="font-size: 75%; line-height: 1.25em;">
                             <pre><code id="regcallbacks-code" class="language-javascript" contenteditable>
@@ -392,7 +392,7 @@ sandlog('seq2: a = ' + a);
 
                     <!-- relaystate -->
                     <section data-state="deferred-relaystate">
-                        <h2>And relay the <i>success</i> or <i>failure</i> state of any synchronous or asynchronous function</h2>
+                        <h2>Relay the success or failure state of any sync or async function</h2>
                             <div class="codeboxwrapper">
                             <pre><code id="relaystate-code" class="language-javascript" contenteditable>
 function asyncSuccess(bool) {
@@ -416,6 +416,12 @@ asyncSuccess(true).done(function () {
                 </section>
 
                 <section>
+
+            <!-- $.Deferred intro -->
+                <section>
+                    <h2>$.Deferred() spec</h2>
+                    <p><a href="http://api.jquery.com/jQuery.Deferred/" target="_blank">http://api.jquery.com/jQuery.Deferred/</a></p>
+                </section>
 
             <!-- $.Deferred done() -->
                 <section data-state="deferred-done">
@@ -448,15 +454,15 @@ asyncSuccess(false).fail(function () {
                 <!-- $.Deferred then() -->
                     <section data-state="deferred-then">
                         <h2>.then()</h2>
-                        <p>Add handlers to be called when the Deferred object is resolved, rejected, or still in progress.</p>
+                        <p>Add handlers to be called when the Deferred object is either resolved or rejected.</p>
                         <div class="codeboxwrapper">
                             <pre><code id="then-code" class="language-javascript" contenteditable>
-asyncSuccess(true).then(function () {
-    sandlog('then');
-}).done(function () {
+asyncSuccess(true).done(function () {
     sandlog('success');
 }).fail(function () {
     sandlog('fail');
+}).then(function () {
+    sandlog('then');
 });
                             </code></pre>
                             <div class="then sandbox">a = ?</div>
@@ -466,15 +472,15 @@ asyncSuccess(true).then(function () {
                 <!-- $.Deferred always() -->
                     <section data-state="deferred-always">
                         <h2>.always()</h2>
-                        <p>Add handlers to be called when the Deferred object is either resolved or rejected.</p>
+                        <p>Add handlers to be called when the Deferred object is resolved, rejected, or still in progress.</p>
                         <div class="codeboxwrapper">
                             <pre><code id="always-code" class="language-javascript" contenteditable>
-asyncSuccess(false).always(function () {
-    sandlog('always');
-}).done(function () {
+asyncSuccess(false).done(function () {
     sandlog('success');
 }).fail(function () {
     sandlog('fail');
+}).always(function () {
+    sandlog('always');
 });
                             </code></pre>
                             <div class="always sandbox">a = ?</div>
@@ -565,6 +571,19 @@ dfdState().fail(function (args) {
                             <div class="rejectwith sandbox">a = ?</div>
                         </div>
                     </section>
+                <!-- $.Deferred when() -->
+                    <section data-state="deferred-when">
+                        <h2>$.when()</h2>
+                        <div class="codeboxwrapper">
+                            <pre><code id="when-code" style="font-size: 90%; line-height: 1.2em" class="language-javascript" contenteditable>
+$.when(wait(1000), wait(2000))
+.done(function () {
+    sandlog('both done');
+});
+                            </code></pre>
+                            <div class="when sandbox"></div>
+                        </div>
+                    </section>
 
                 </section>
 
@@ -622,7 +641,7 @@ sandlog("3: I wasn't blocked!");
                     <section data-state="deferred-coupled">
                         <h2>Tighly Coupled Callbacks</h2>
                             <div class="codeboxwrapper">
-                            <pre><code id="coupled-code" style="font-size: 90%; line-height: 1.2em" class="language-javascript" contenteditable>
+                            <pre><code id="coupled-code" class="language-javascript" contenteditable>
 sandlog('1 started');
 
 wait(2000).then(function () {
@@ -663,38 +682,51 @@ dfd2.done(function () {
     sandlog('2 ended');
 });
                             </code></pre>
-                        <!--var aManualDeferred, secondManualDeferred, thirdManualDeferred;-->
-
-                        <!--// Create two new deferred objects-->
-                        <!--aManualDeferred = $.Deferred();-->
-
-                        <!--secondManualDeferred = aManualDeferred.then(function () {-->
-                        <!--sandlog('1 started');-->
-
-                        <!--// We need to return this, we return a new promise which is resolved upon completion.-->
-                        <!--return wait(2000);-->
-                        <!--})-->
-                        <!--.done(function () {-->
-                        <!--sandlog('1 ended');-->
-                        <!--});-->
-
-                        <!--thirdManualDeferred = secondManualDeferred.then(function () {-->
-                        <!--sandlog('2 started');-->
-                        <!--return wait(2000);-->
-                        <!--})-->
-                        <!--.done(function () {-->
-                        <!--sandlog('2 ended');-->
-                        <!--});-->
-
-                        <!--// Resolve the first promise-->
-                        <!--aManualDeferred.resolve();-->
                             <div class="decoupled sandbox"></div>
+                        </div>
+                    </section>
+
+                <!-- multi callbacks -->
+                    <section data-state="deferred-multi">
+                        <h2>Multiple Callbacks</h2>
+                        <div class="codeboxwrapper">
+                                <pre><code id="multi-code" class="language-javascript" contenteditable>
+sandlog('started');
+var dfd = wait(2000);
+
+dfd.done(function () {
+    sandlog('ended A');
+});
+
+dfd.done(function () {
+    sandlog('ended B');
+});
+                                </code></pre>
+                            <div class="multi sandbox"></div>
+                        </div>
+                    </section>
+
+                <!-- decoupled callbacks -->
+                    <section data-state="deferred-callrefs">
+                        <h2>Callback References</h2>
+                        <div class="codeboxwrapper">
+                                <pre><code id="callrefs-code" class="language-javascript" contenteditable>
+var i = 1;
+
+function logDone() {
+    sandlog('done ' + i++);
+}
+
+var dfd = wait(2000);
+
+dfd.done(logDone);
+dfd.done(logDone);
+                                </code></pre>
+                            <div class="callrefs sandbox"></div>
                         </div>
                     </section>
                 </section>
 
-
-                <!-- $.Deferred multiple/when() -->
                 <!-- $.Deferred chaining -->
 
                 <!-- $.Deferred ex:fetch() -->
@@ -705,14 +737,16 @@ dfd2.done(function () {
                 <section>
                     <h2>$.Deferred() and Beyond</h2>
                     <h3> <span class="mw-headline" id="Libraries"> Libraries </span></h3>
-                    <ul><li> <a rel="nofollow" class="external text" href="https://github.com/kriskowal/q">Q</a> Works in both NodeJS and browsers, compatible with jQuery, thenable, and usable as remote objects via message passing
-                    </li><li> <a rel="nofollow" class="external text" href="https://github.com/tildeio/rsvp.js">RSVP.js</a> A lightweight library that provides tools for organizing asynchronous code
-                    </li><li> <a rel="nofollow" class="external text" href="https://github.com/cujojs/when">when.js</a> Compact promises with joining and chaining
-                    </li><li> <a rel="nofollow" class="external text" href="https://github.com/kriszyp/node-promise">node-promise</a> Promises for NodeJS
-                    </li><li> <a rel="nofollow" class="external text" href="http://api.jquery.com/category/deferred-object/">jQuery 1.5</a> is said  to be 'based on the CommonJS Promises/A design'.
-                    </li><li> <a rel="nofollow" class="external text" href="https://github.com/ForbesLindesay/promises-a">ForbesLindesay/promises-a</a> A bare bones implementation of Promises/A intended to pass <a rel="nofollow" class="external free" href="https://github.com/domenic/promise-tests">https://github.com/domenic/promise-tests</a> while being as small as possible
-                    </li><li> <a rel="nofollow" class="external text" href="http://msdn.microsoft.com/en-us/library/windows/apps/br211867.aspx">WinJS / Windows 8 / Metro</a>
-                    </li></ul>
+                    <ul style="font-size: 80%">
+                        <li> <a rel="nofollow" class="external text" href="https://github.com/kriskowal/q">Q</a> Works in both NodeJS and browsers, compatible with jQuery, thenable, and usable as remote objects via message passing
+                        </li><li> <a rel="nofollow" class="external text" href="https://github.com/tildeio/rsvp.js">RSVP.js</a> A lightweight library that provides tools for organizing asynchronous code
+                        </li><li> <a rel="nofollow" class="external text" href="https://github.com/cujojs/when">when.js</a> Compact promises with joining and chaining
+                        </li><li> <a rel="nofollow" class="external text" href="https://github.com/kriszyp/node-promise">node-promise</a> Promises for NodeJS
+                        </li><li> <a rel="nofollow" class="external text" href="http://api.jquery.com/category/deferred-object/">jQuery 1.5</a> is said  to be 'based on the CommonJS Promises/A design'.
+                        </li><li> <a rel="nofollow" class="external text" href="https://github.com/ForbesLindesay/promises-a">ForbesLindesay/promises-a</a> A bare bones implementation of Promises/A intended to pass <a rel="nofollow" class="external free" href="https://github.com/domenic/promise-tests">https://github.com/domenic/promise-tests</a> while being as small as possible
+                        </li><li> <a rel="nofollow" class="external text" href="http://msdn.microsoft.com/en-us/library/windows/apps/br211867.aspx">WinJS / Windows 8 / Metro</a>
+                        </li>
+                    </ul>
                 </section>
 
 <!--
@@ -1257,6 +1291,9 @@ g.selectAll('rect')
             interactiveSlide('deferred-nonblock', 'nonblock', updateDeferred);
             interactiveSlide('deferred-coupled', 'coupled', updateDeferred);
             interactiveSlide('deferred-decoupled', 'decoupled', updateDeferred);
+            interactiveSlide('deferred-multi', 'multi', updateDeferred);
+            interactiveSlide('deferred-when', 'when', updateDeferred);
+            interactiveSlide('deferred-callrefs', 'callrefs', updateDeferred);
             interactiveSlide('primitive-rect', 'rect', updateD3);
             interactiveSlide('primitive-circle', 'circle', updateD3);
             interactiveSlide('primitive-ellipse', 'ellipse', updateD3);
