@@ -39,6 +39,14 @@ function wait(ms) {
     return deferred.promise();
 }
 
+function asyncSuccess(bool) {
+    var dfd = $.Deferred();
+    setTimeout(function () {
+        bool ? dfd.resolve() : dfd.reject();
+    }, 2000);
+    return dfd;
+}
+
 updateD3 = function updateD3(svg, elem, parent, h, w, data) {
     return function() {
         svg.selectAll(parent).remove();
@@ -145,17 +153,19 @@ updateDeferred = function create_updateDeferred(svg, elem, parent) {
 
         var sandlog = _sandlog(elem);
 
-        var fn = new Function(
-            'sandlog',
-            'var promise,done,fail,a;' +
-             elem.textContent +
-            ';return { done:done, fail:fail, promise:promise, a:a, };')(sandlog);
+        var fn = new Function('sandlog', elem.textContent + ';')(sandlog);
 
-
-        var promise = fn.promise && fn.promise() || $.Deferred().resolve();
-        
-        promise.done(fn.done);
-        promise.fail(fn.fail);
+//        var fn = new Function(
+//            'sandlog',
+//            'var promise,done,fail,a;' +
+//             elem.textContent +
+//            ';return { done:done, fail:fail, promise:promise, a:a, };')(sandlog);
+//
+//
+//        var promise = fn.promise && fn.promise() || $.Deferred().resolve();
+//
+//        promise.done(fn.done);
+//        promise.fail(fn.fail);
 
         //$(elem.parentElement.parentElement).find('.sandbox').html('a = ' + fn.a);
         
